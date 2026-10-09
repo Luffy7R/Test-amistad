@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#102A43">
 <title>☠️ Test de amistad de Ryan</title>
+
 <style>
 :root{
   --navy:#102A43;
@@ -35,7 +35,8 @@ body{
 }
 .card:before{
   content:"";position:absolute;top:0;left:0;right:0;
-  height:8px;background:linear-gradient(90deg,var(--red) 33%,var(--yellow) 33% 66%,var(--sky) 66%);
+  height:8px;
+  background:linear-gradient(90deg,var(--red) 33%,var(--yellow) 33% 66%,var(--sky) 66%);
 }
 header{text-align:center}
 .flag{font-size:38px}
@@ -46,8 +47,9 @@ h1{
 .sub{color:var(--blue);font-weight:bold}
 p{line-height:1.6}
 .pill{
-  display:inline-block;background:#FFF0B5;border:1px solid var(--yellow);
-  border-radius:30px;padding:7px 12px;font-size:12px;font-weight:bold;
+  display:inline-block;background:#FFF0B5;
+  border:1px solid var(--yellow);border-radius:30px;
+  padding:7px 12px;font-size:12px;font-weight:bold;
 }
 .primary{
   display:block;width:100%;border:0;border-radius:13px;
@@ -57,6 +59,12 @@ p{line-height:1.6}
 }
 .primary:active{transform:translateY(2px);box-shadow:0 2px 0 #9F2020}
 .primary:disabled{opacity:.45;cursor:not-allowed}
+.secondary{
+  display:block;width:100%;border:2px solid var(--blue);
+  border-radius:13px;padding:13px;margin-top:12px;
+  background:white;color:var(--blue);font-size:15px;
+  font-weight:bold;cursor:pointer;
+}
 input{
   width:100%;padding:14px;border:2px solid var(--blue);
   border-radius:12px;font-size:16px;margin-top:8px;
@@ -65,9 +73,19 @@ input{
 label{font-weight:bold}
 .hidden{display:none!important}
 .note{text-align:center;color:#567087;font-size:12px;line-height:1.5}
-.meta{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:bold;color:var(--blue)}
-.progress{height:9px;background:#DDECF7;border-radius:20px;overflow:hidden;margin:15px 0 20px}
-#bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--sky),var(--yellow));transition:width .2s}
+.meta{
+  display:flex;justify-content:space-between;gap:8px;
+  font-size:13px;font-weight:bold;color:var(--blue)
+}
+.progress{
+  height:9px;background:#DDECF7;border-radius:20px;
+  overflow:hidden;margin:15px 0 20px
+}
+#bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--blue),var(--sky),var(--yellow));
+  transition:width .2s
+}
 h2{font-size:21px;line-height:1.4}
 .options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .opt{
@@ -79,17 +97,53 @@ h2{font-size:21px;line-height:1.4}
 .opt:nth-child(4n+2){border-color:var(--blue)}
 .opt:nth-child(4n+3){border-color:#E8B400}
 .opt:nth-child(4n){border-color:var(--pink)}
-.opt.selected{background:#FFF0B5;border-color:var(--red);font-weight:bold;box-shadow:0 0 0 2px #FFC928}
+.opt.selected{
+  background:#FFF0B5;border-color:var(--red);
+  font-weight:bold;box-shadow:0 0 0 2px #FFC928
+}
 .result{text-align:center}
 .score{font-size:43px;font-weight:bold;color:var(--blue);margin:12px}
-.message{background:#FFF0B5;border:2px solid var(--yellow);border-radius:15px;padding:16px;line-height:1.6;font-weight:bold}
+.message{
+  background:#FFF0B5;border:2px solid var(--yellow);
+  border-radius:15px;padding:16px;line-height:1.6;font-weight:bold
+}
 .seal{font-size:46px}
+
+/* Revisión de respuestas */
+.review-intro{text-align:center}
+.review-list{
+  display:grid;gap:13px;margin-top:18px;text-align:left
+}
+.review-item{
+  border:2px solid #B9D9F0;border-radius:14px;
+  padding:14px;background:#F8FBFF;
+  overflow-wrap:anywhere
+}
+.review-item.correct{
+  border-color:#269653;background:#EAF8EF
+}
+.review-item.wrong{
+  border-color:#D93636;background:#FFF0F0
+}
+.review-title{
+  font-weight:bold;font-size:15px;line-height:1.5;
+  margin-bottom:10px
+}
+.review-status{font-weight:bold;margin-bottom:9px}
+.review-answer{font-size:14px;line-height:1.6;margin-top:5px}
+.good{color:#18783A}
+.bad{color:#B42323}
+.answer-key{font-weight:bold}
+
 @media(max-width:360px){
-  body{padding:10px}.card{padding:18px}.options{grid-template-columns:1fr}
+  body{padding:10px}
+  .card{padding:18px}
+  .options{grid-template-columns:1fr}
   h1{font-size:25px}
 }
 </style>
 </head>
+
 <body>
 <main class="card">
 
@@ -104,18 +158,24 @@ h2{font-size:21px;line-height:1.4}
 <p>¡Bienvenido a mi tripulación! 💗 Responde estas preguntas para descubrir qué tanto conoces a Ryan. No vale hacer trampa ni pedir ayuda. JAJAJA 😂</p>
 
 <label for="playerName">¿Cuál es tu nombre o apodo?</label>
-<input id="playerName" maxlength="40" autocomplete="nickname" placeholder="Escribe tu nombre aquí">
+<input id="playerName" maxlength="40" autocomplete="nickname"
+placeholder="Escribe tu nombre aquí">
 
-<p>🏴‍☠️ 15 preguntas para demostrar tu amistad.<br>
+<p>
+🏴‍☠️ 15 preguntas para demostrar tu amistad.<br>
 🚫 No puedes regresar a preguntas anteriores.<br>
-💥 ¡Demuestra que mereces estar en la tripulación!</p>
+💥 ¡Demuestra que mereces estar en la tripulación!
+</p>
 
 <button class="primary" id="start">¡ZARPAR! ☠️</button>
 <p class="note">Una vez terminado, este navegador quedará bloqueado para nuevos intentos.</p>
 </section>
 
 <section id="quiz" class="hidden">
-  <div class="meta"><span id="num"></span><span id="count"></span></div>
+  <div class="meta">
+    <span id="num"></span>
+    <span id="count"></span>
+  </div>
   <div class="progress"><div id="bar"></div></div>
   <h2 id="question"></h2>
   <div id="options" class="options"></div>
@@ -129,7 +189,33 @@ h2{font-size:21px;line-height:1.4}
   <p id="greeting"></p>
   <div class="score" id="score"></div>
   <div class="message" id="message"></div>
-  <p class="note">Gracias por participar en el test de amistad de Ryan. 🌊</p>
+
+  <button class="primary" id="reviewBtn">
+    📖 Revisar mis respuestas
+  </button>
+
+  <p class="note">
+    Puedes revisar tus aciertos y errores para descubrir qué tanto conoces a Ryan. 🌊
+  </p>
+  <p class="note">Gracias por participar en el test de amistad de Ryan. 💗</p>
+</section>
+
+<section id="review" class="hidden">
+  <header>
+    <div class="flag">📜 ☠️</div>
+    <h1>REVISIÓN DEL NAKAMA</h1>
+    <p class="sub" id="reviewGreeting"></p>
+    <p id="reviewScore"></p>
+  </header>
+
+  <div id="reviewList" class="review-list"></div>
+
+  <button class="primary" id="backResult">
+    Volver a mi resultado 🏴‍☠️
+  </button>
+  <p class="note">
+    Las respuestas verdes son correctas y las rojas son incorrectas.
+  </p>
 </section>
 
 <section id="blocked" class="hidden result">
@@ -162,33 +248,42 @@ const qs=[
 ];
 
 const KEY="ryan_test_amistad_completed_v1";
-let i=0,answers=[],chosen=null,player="";
+let i=0,answers=[],chosen=null,player="",finalScore=0;
 
 const $=id=>document.getElementById(id);
 
 function show(id){
-  ["intro","quiz","result","blocked"].forEach(s=>
-    $(s).classList.toggle("hidden",s!==id)
-  );
+  ["intro","quiz","result","review","blocked"].forEach(s=>{
+    $(s).classList.toggle("hidden",s!==id);
+  });
 }
 
-try{
-  if(localStorage.getItem(KEY)){
-    show("blocked");
+function isCompleted(){
+  try{
+    return localStorage.getItem(KEY)==="1";
+  }catch(e){
+    return false;
   }
-}catch(e){}
+}
+
+if(isCompleted()){
+  show("blocked");
+}
 
 $("start").onclick=()=>{
-  if(localStorage.getItem(KEY)){
+  if(isCompleted()){
     show("blocked");
     return;
   }
+
   player=$("playerName").value.trim();
+
   if(!player){
     $("playerName").focus();
     $("playerName").placeholder="Primero escribe tu nombre 🙂";
     return;
   }
+
   show("quiz");
   render();
 };
@@ -196,32 +291,41 @@ $("start").onclick=()=>{
 function render(){
   chosen=null;
   const q=qs[i];
+
   $("num").textContent=`Pregunta ${i+1} de ${qs.length}`;
   $("count").textContent=`${i} respondidas`;
   $("bar").style.width=(i/qs.length*100)+"%";
   $("question").textContent=q[0];
   $("options").innerHTML="";
   $("next").disabled=true;
-  $("next").textContent=i===qs.length-1?"Ver resultado 🏴‍☠️":"Siguiente ➜";
+  $("next").textContent=i===qs.length-1
+    ?"Ver resultado 🏴‍☠️"
+    :"Siguiente ➜";
 
   q[1].forEach((v,j)=>{
     const b=document.createElement("button");
     b.type="button";
     b.className="opt";
     b.textContent=String.fromCharCode(65+j)+") "+v;
+
     b.onclick=()=>{
       chosen=j;
-      [...$("options").children].forEach(x=>x.classList.remove("selected"));
+      [...$("options").children].forEach(x=>
+        x.classList.remove("selected")
+      );
       b.classList.add("selected");
       $("next").disabled=false;
     };
+
     $("options").appendChild(b);
   });
 }
 
 $("next").onclick=()=>{
   if(chosen===null)return;
+
   answers[i]=chosen;
+
   if(i<qs.length-1){
     i++;
     render();
@@ -231,20 +335,21 @@ $("next").onclick=()=>{
 };
 
 function finish(){
-  let score=0;
+  finalScore=0;
+
   qs.forEach((q,j)=>{
-    if(answers[j]===q[2])score++;
+    if(answers[j]===q[2])finalScore++;
   });
 
   $("bar").style.width="100%";
   $("greeting").textContent=`¡Buen trabajo, ${player}! Veamos tu resultado.`;
-  $("score").textContent=`${score} / 15`;
+  $("score").textContent=`${finalScore} / ${qs.length}`;
 
-  if(score===15){
+  if(finalScore===15){
     $("message").textContent="¡SABES DEMASIADO! 😭💗 Eres de los míos. Amistad nivel legendario. 🫂";
-  }else if(score>=12){
+  }else if(finalScore>=12){
     $("message").textContent="Muy buena amistad, te salvaste. 💕 ¡Un verdadero nakama!";
-  }else if(score>=10){
+  }else if(finalScore>=10){
     $("message").textContent="Te conozco más yo a ti que tú a mí. JAJAJA 😂🏴‍☠️";
   }else{
     $("message").textContent="MENOS DE 10… LO SIENTO, PERO: BLOQUEADO. 💀🚫 JAJAJA";
@@ -255,9 +360,74 @@ function finish(){
   }catch(e){
     alert("Tu navegador no permitió guardar el bloqueo. Evita recargar la página si quieres conservar este intento.");
   }
+
   show("result");
 }
+
+function buildReview(){
+  $("reviewGreeting").textContent=`Respuestas de ${player}`;
+  $("reviewScore").textContent=`Resultado final: ${finalScore} de ${qs.length} correctas`;
+
+  const list=$("reviewList");
+  list.innerHTML="";
+
+  qs.forEach((q,j)=>{
+    const correctIndex=q[2];
+    const selectedIndex=answers[j];
+    const isCorrect=selectedIndex===correctIndex;
+
+    const item=document.createElement("article");
+    item.className="review-item "+(isCorrect?"correct":"wrong");
+
+    const title=document.createElement("div");
+    title.className="review-title";
+    title.textContent=`${j+1}. ${q[0]}`;
+
+    const status=document.createElement("div");
+    status.className="review-status "+(isCorrect?"good":"bad");
+    status.textContent=isCorrect
+      ?"✅ ¡Respuesta correcta!"
+      :"❌ Respuesta incorrecta";
+
+    const yourAnswer=document.createElement("div");
+    yourAnswer.className="review-answer";
+    const yourLabel=document.createElement("strong");
+    yourLabel.textContent="Tu respuesta: ";
+    yourAnswer.appendChild(yourLabel);
+    yourAnswer.appendChild(document.createTextNode(
+      String.fromCharCode(65+selectedIndex)+") "+q[1][selectedIndex]
+    ));
+
+    item.appendChild(title);
+    item.appendChild(status);
+    item.appendChild(yourAnswer);
+
+    if(!isCorrect){
+      const correctAnswer=document.createElement("div");
+      correctAnswer.className="review-answer answer-key";
+
+      const correctLabel=document.createElement("strong");
+      correctLabel.textContent="Respuesta correcta: ";
+
+      correctAnswer.appendChild(correctLabel);
+      correctAnswer.appendChild(document.createTextNode(
+        String.fromCharCode(65+correctIndex)+") "+q[1][correctIndex]
+      ));
+
+      item.appendChild(correctAnswer);
+    }
+
+    list.appendChild(item);
+  });
+
+  show("review");
+}
+
+$("reviewBtn").onclick=buildReview;
+
+$("backResult").onclick=()=>{
+  show("result");
+};
 </script>
 </body>
 </html>
-
