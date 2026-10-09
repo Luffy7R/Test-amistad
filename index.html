@@ -267,22 +267,7 @@ function isCompleted(){
 }
 
 if(isCompleted()){
-  const retryKey = "ryan_test_amistad_retry_used_v1";
-  const retryUsed = localStorage.getItem(retryKey) === "1";
-
-  if(!retryUsed){
-    const code = prompt("Ingresa el código de reintento:");
-
-    if(code === "RYAN2026"){
-      localStorage.removeItem(KEY);
-      localStorage.setItem(retryKey, "1");
-      location.reload();
-    } else {
-      show("blocked");
-    }
-  } else {
-    show("blocked");
-  }
+  show("blocked");
 }
 
 $("start").onclick=()=>{
