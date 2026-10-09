@@ -13,22 +13,22 @@
 
     body {
       margin: 0;
-      padding: 20px;
+      padding: 18px;
       font-family: Arial, Helvetica, sans-serif;
       background: linear-gradient(135deg, #17142b, #29245b, #174c70);
-      color: #ffffff;
+      color: white;
       min-height: 100vh;
     }
 
     .contenedor {
       width: 100%;
       max-width: 800px;
-      margin: 0 auto;
+      margin: auto;
     }
 
     header {
       text-align: center;
-      padding: 20px 10px;
+      padding: 18px 5px;
     }
 
     h1 {
@@ -42,15 +42,15 @@
     }
 
     .progreso-contenedor {
-      margin: 15px 0 25px;
+      margin: 18px 0 24px;
     }
 
     .progreso-texto {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      font-size: 14px;
       margin-bottom: 8px;
+      font-size: 14px;
       color: #e0e4ff;
     }
 
@@ -66,15 +66,15 @@
       width: 0%;
       background: #7de3ff;
       border-radius: 20px;
-      transition: width 0.25s ease;
+      transition: width 0.25s;
     }
 
     .pregunta {
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 16px;
       padding: 20px;
-      margin-bottom: 18px;
+      margin-bottom: 17px;
     }
 
     .pregunta h2 {
@@ -94,16 +94,15 @@
       gap: 12px;
       padding: 13px;
       margin: 9px 0;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 10px;
-      background: rgba(10, 10, 30, 0.22);
+      background: rgba(10,10,30,0.22);
       cursor: pointer;
       line-height: 1.45;
-      transition: background 0.2s, border-color 0.2s;
     }
 
     .opcion:hover {
-      background: rgba(125, 227, 255, 0.12);
+      background: rgba(125,227,255,0.12);
       border-color: #7de3ff;
     }
 
@@ -115,15 +114,8 @@
       height: 17px;
     }
 
-    .botones {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 25px 0;
-    }
-
     button {
-      border: none;
+      border: 0;
       border-radius: 11px;
       padding: 14px 20px;
       font-size: 16px;
@@ -132,30 +124,25 @@
     }
 
     button:focus-visible {
-      outline: 3px solid #ffffff;
+      outline: 3px solid white;
       outline-offset: 3px;
     }
 
     .principal {
       background: #7de3ff;
       color: #15152d;
-      flex: 1;
-    }
-
-    .secundario {
-      background: #39365f;
-      color: white;
+      width: 100%;
     }
 
     button:disabled {
-      opacity: 0.45;
+      opacity: 0.55;
       cursor: not-allowed;
     }
 
     #resultado {
       display: none;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 16px;
       padding: 22px;
       margin: 25px 0;
@@ -168,8 +155,8 @@
 
     .revision {
       padding: 14px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-      line-height: 1.6;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+      line-height: 1.7;
     }
 
     .correcta {
@@ -178,6 +165,14 @@
 
     .incorrecta {
       color: #ffaaaa;
+    }
+
+    .aviso {
+      font-size: 13px;
+      color: #c5c8ed;
+      text-align: center;
+      line-height: 1.5;
+      margin: 20px 0;
     }
 
     .pie {
@@ -195,17 +190,12 @@
       .pregunta {
         padding: 16px;
       }
-
-      .botones button {
-        width: 100%;
-      }
     }
   </style>
 </head>
 
 <body>
   <main class="contenedor">
-
     <header>
       <h1>💙 Test de amistad de Ryan 💙</h1>
       <p>
@@ -219,6 +209,7 @@
         <span id="contador">0 de 17 respondidas</span>
         <span>17 preguntas</span>
       </div>
+
       <div
         class="barra"
         role="progressbar"
@@ -235,30 +226,25 @@
     <form id="formulario">
       <div id="listaPreguntas"></div>
 
-      <div class="botones">
-        <button type="button" class="secundario" id="limpiar">
-          Borrar respuestas
-        </button>
-        <button type="submit" class="principal">
-          Terminar test y ver resultado
-        </button>
-      </div>
+      <button type="submit" class="principal" id="botonTerminar">
+        Terminar test y ver resultado
+      </button>
     </form>
+
+    <p class="aviso">
+      🔒 Tu progreso se guarda en este navegador.
+      Actualizar la página no borrará tus respuestas.
+    </p>
 
     <section id="resultado" aria-live="polite" tabindex="-1"></section>
 
     <div class="pie">
       Hecho con 💙 para poner a prueba tu amistad con Ryan.
     </div>
-
   </main>
 
   <script>
     "use strict";
-
-    // LAS 17 PREGUNTAS Y SUS RESPUESTAS CORRECTAS
-    // La respuesta correcta se identifica contando desde 0:
-    // 0 = primera opción, 1 = segunda, 2 = tercera, etc.
 
     const preguntas = [
       {
@@ -388,103 +374,134 @@
       }
     ];
 
+    if (preguntas.length !== 17) {
+      throw new Error("El test debe contener exactamente 17 preguntas.");
+    }
+
+    const CLAVE_TEST = "testAmistadRyan_v1";
+
     const formulario = document.getElementById("formulario");
     const listaPreguntas = document.getElementById("listaPreguntas");
     const contador = document.getElementById("contador");
     const barraProgreso = document.getElementById("barraProgreso");
     const barraContenedor = document.getElementById("barraContenedor");
     const resultado = document.getElementById("resultado");
-    const botonLimpiar = document.getElementById("limpiar");
+    const botonTerminar = document.getElementById("botonTerminar");
 
-    // Comprobación para evitar publicar una lista incompleta.
-    if (preguntas.length !== 17) {
-      listaPreguntas.textContent =
-        "Error: el test debe contener exactamente 17 preguntas.";
-      throw new Error(
-        "El test debe contener 17 preguntas, pero contiene " +
-        preguntas.length
-      );
+    let testTerminado = false;
+
+    function escaparHTML(texto) {
+      return String(texto).replace(/[&<>"']/g, function(caracter) {
+        const entidades = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        };
+        return entidades[caracter];
+      });
     }
 
-    // Generar las 17 preguntas automáticamente.
-    preguntas.forEach((item, indice) => {
-      const bloque = document.createElement("section");
-      bloque.className = "pregunta";
+    function leerDatosGuardados() {
+      try {
+        const guardado = localStorage.getItem(CLAVE_TEST);
+        return guardado ? JSON.parse(guardado) : null;
+      } catch (error) {
+        console.warn("No se pudieron leer los datos guardados.", error);
+        return null;
+      }
+    }
 
-      const titulo = document.createElement("h2");
-      const numero = document.createElement("span");
-      numero.className = "numero";
-      numero.textContent = "Pregunta " + (indice + 1) + " de 17: ";
-
-      titulo.appendChild(numero);
-      titulo.appendChild(document.createTextNode(item.pregunta));
-      bloque.appendChild(titulo);
-
-      item.opciones.forEach((opcion, indiceOpcion) => {
-        const etiqueta = document.createElement("label");
-        etiqueta.className = "opcion";
-
-        const radio = document.createElement("input");
-        radio.type = "radio";
-        radio.name = "pregunta" + indice;
-        radio.value = String(indiceOpcion);
-        radio.required = true;
-
-        radio.addEventListener("change", actualizarProgreso);
-
-        const texto = document.createElement("span");
-        texto.textContent = opcion;
-
-        etiqueta.appendChild(radio);
-        etiqueta.appendChild(texto);
-        bloque.appendChild(etiqueta);
-      });
-
-      listaPreguntas.appendChild(bloque);
-    });
-
-    function actualizarProgreso() {
-      let respondidas = 0;
-
-      preguntas.forEach((item, indice) => {
+    function obtenerRespuestas() {
+      return preguntas.map((pregunta, indice) => {
         const seleccionada = formulario.querySelector(
           'input[name="pregunta' + indice + '"]:checked'
         );
-
-        if (seleccionada) {
-          respondidas++;
-        }
+        return seleccionada ? Number(seleccionada.value) : null;
       });
+    }
+
+    function guardarProgreso() {
+      try {
+        localStorage.setItem(CLAVE_TEST, JSON.stringify({
+          respuestas: obtenerRespuestas(),
+          terminado: testTerminado
+        }));
+      } catch (error) {
+        console.warn("No se pudo guardar el progreso.", error);
+      }
+    }
+
+    function actualizarProgreso() {
+      const respuestas = obtenerRespuestas();
+      const respondidas = respuestas.filter(
+        respuesta => respuesta !== null
+      ).length;
 
       contador.textContent = respondidas + " de 17 respondidas";
-
-      barraProgreso.style.width =
-        ((respondidas / 17) * 100) + "%";
-
+      barraProgreso.style.width = (respondidas / 17 * 100) + "%";
       barraContenedor.setAttribute("aria-valuenow", respondidas);
     }
 
-    // Calcular puntuación y mostrar la revisión.
-    formulario.addEventListener("submit", function(evento) {
-      evento.preventDefault();
+    function crearPreguntas() {
+      preguntas.forEach((item, indice) => {
+        const bloque = document.createElement("section");
+        bloque.className = "pregunta";
+
+        const titulo = document.createElement("h2");
+        const numero = document.createElement("span");
+        numero.className = "numero";
+        numero.textContent = "Pregunta " + (indice + 1) + " de 17: ";
+
+        titulo.appendChild(numero);
+        titulo.appendChild(document.createTextNode(item.pregunta));
+        bloque.appendChild(titulo);
+
+        item.opciones.forEach((opcion, indiceOpcion) => {
+          const etiqueta = document.createElement("label");
+          etiqueta.className = "opcion";
+
+          const radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = "pregunta" + indice;
+          radio.value = String(indiceOpcion);
+          radio.required = true;
+
+          radio.addEventListener("change", function() {
+            actualizarProgreso();
+            guardarProgreso();
+          });
+
+          const texto = document.createElement("span");
+          texto.textContent = opcion;
+
+          etiqueta.appendChild(radio);
+          etiqueta.appendChild(texto);
+          bloque.appendChild(etiqueta);
+        });
+
+        listaPreguntas.appendChild(bloque);
+      });
+    }
+
+    function mostrarResultado() {
+      const respuestas = obtenerRespuestas();
+
+      if (respuestas.some(respuesta => respuesta === null)) {
+        testTerminado = false;
+        guardarProgreso();
+        return;
+      }
 
       let puntuacion = 0;
       let revisionHTML = "";
 
       preguntas.forEach((item, indice) => {
-        const seleccionada = formulario.querySelector(
-          'input[name="pregunta' + indice + '"]:checked'
-        );
-
-        const respuestaUsuario = Number(seleccionada.value);
+        const respuestaUsuario = respuestas[indice];
         const acerto = respuestaUsuario === item.correcta;
 
-        if (acerto) {
-          puntuacion++;
-        }
-
-        const respuestaCorrecta = item.opciones[item.correcta];
-        const respuestaElegida = item.opciones[respuestaUsuario];
+        if (acerto) puntuacion++;
 
         revisionHTML += `
           <div class="revision">
@@ -492,15 +509,15 @@
             <span class="${acerto ? "correcta" : "incorrecta"}">
               ${acerto ? "✓ Correcto" : "✗ Incorrecto"}
             </span><br>
-            Tu respuesta: ${escaparHTML(respuestaElegida)}<br>
-            Respuesta correcta: ${escaparHTML(respuestaCorrecta)}
+            Tu respuesta: ${escaparHTML(item.opciones[respuestaUsuario])}<br>
+            Respuesta correcta: ${escaparHTML(item.opciones[item.correcta])}
           </div>
         `;
       });
 
-      const porcentaje = Math.round((puntuacion / 17) * 100);
-      let mensaje;
+      const porcentaje = Math.round(puntuacion / 17 * 100);
 
+      let mensaje;
       if (puntuacion === 17) {
         mensaje = "¡Perfecto! ¡Conoces a Ryan de maravilla! 🏆";
       } else if (puntuacion >= 14) {
@@ -515,64 +532,95 @@
 
       resultado.innerHTML = `
         <h2>🎉 ¡Test terminado!</h2>
-        <p style="font-size: 32px; font-weight: bold;">
-          ${puntuacion} / 17
-        </p>
+        <p style="font-size:32px;font-weight:bold">${puntuacion} / 17</p>
         <p>${porcentaje}% de respuestas correctas.</p>
         <p>${mensaje}</p>
         <h3>Revisión de tus respuestas</h3>
         ${revisionHTML}
-        <button type="button" class="principal" id="reintentar">
-          Intentar de nuevo
-        </button>
+        <p class="aviso">
+          Este test ya está terminado en este navegador.
+        </p>
       `;
 
       resultado.style.display = "block";
+      formulario.style.display = "none";
+      testTerminado = true;
+      guardarProgreso();
+    }
+
+    function cargarProgreso() {
+      const datos = leerDatosGuardados();
+
+      if (!datos ||
+          !Array.isArray(datos.respuestas) ||
+          datos.respuestas.length !== preguntas.length) {
+        return;
+      }
+
+      datos.respuestas.forEach((respuesta, indice) => {
+        if (respuesta === null) return;
+
+        const opcion = Number(respuesta);
+
+        if (!Number.isInteger(opcion) ||
+            opcion < 0 ||
+            opcion >= preguntas[indice].opciones.length) {
+          return;
+        }
+
+        const radio = formulario.querySelector(
+          'input[name="pregunta' + indice + '"][value="' + opcion + '"]'
+        );
+
+        if (radio) radio.checked = true;
+      });
+
+      actualizarProgreso();
+
+      if (datos.terminado) {
+        const respuestas = obtenerRespuestas();
+
+        if (respuestas.every(respuesta => respuesta !== null)) {
+          mostrarResultado();
+        }
+      }
+    }
+
+    formulario.addEventListener("submit", function(evento) {
+      evento.preventDefault();
+
+      if (testTerminado) return;
+
+      const respuestas = obtenerRespuestas();
+
+      if (respuestas.some(respuesta => respuesta === null)) {
+        const primeraSinResponder = preguntas.findIndex(
+          (pregunta, indice) => respuestas[indice] === null
+        );
+
+        const bloque = listaPreguntas.children[primeraSinResponder];
+        const radio = bloque.querySelector("input");
+
+        radio.focus();
+        bloque.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+        alert("Responde las 17 preguntas antes de terminar el test.");
+        return;
+      }
+
+      mostrarResultado();
       resultado.focus();
       resultado.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
-
-      document.getElementById("reintentar").addEventListener(
-        "click",
-        reiniciarTest
-      );
     });
 
-    // Evitar que los textos de las preguntas se interpreten como HTML.
-    function escaparHTML(texto) {
-      return String(texto).replace(/[&<>"']/g, function(caracter) {
-        const entidades = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        };
-
-        return entidades[caracter];
-      });
-    }
-
-    function reiniciarTest() {
-      formulario.reset();
-      resultado.style.display = "none";
-      resultado.innerHTML = "";
-      actualizarProgreso();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-    botonLimpiar.addEventListener("click", function() {
-      reiniciarTest();
-    });
-
-    // Confirmar visualmente que se cargaron las 17 preguntas.
-    contador.textContent = "0 de " + preguntas.length + " respondidas";
+    crearPreguntas();
+    cargarProgreso();
   </script>
 </body>
 </html>
