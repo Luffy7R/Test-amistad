@@ -46,6 +46,7 @@ h1 {
 
 .question h3 {
   margin-top: 0;
+  line-height: 1.5;
 }
 
 label {
@@ -110,6 +111,7 @@ button:disabled {
 <body>
 
 <div class="container">
+
   <h1>☠️ Test de amistad de Ryan ☠️</h1>
 
   <p class="subtitle">
@@ -123,25 +125,32 @@ button:disabled {
   </button>
 
   <div id="resultado" aria-live="polite"></div>
+
 </div>
 
 <script>
 const preguntas = [
+
+  // PREGUNTAS ORIGINALES (1-10)
+
   {
     pregunta: "¿Superheroe favorito?",
     opciones: ["luffy", "superman", "Spiderman", "Iron man"],
     correcta: 2
   },
+
   {
     pregunta: "¿Persona que mas he amado? (No familia)",
     opciones: ["Una ex", "Messi", "Luffy", "Keiko"],
     correcta: 1
   },
+
   {
     pregunta: "¿Cuantas de mis mascotas fueron elegidas por mi?",
     opciones: ["1", "2", "todas", "Ninguna"],
     correcta: 3
   },
+
   {
     pregunta: "¿Crees que en verdad es serrucho, infiel o el peor hombre del mundo?",
     opciones: [
@@ -152,26 +161,41 @@ const preguntas = [
     ],
     correcta: 1
   },
+
   {
     pregunta: "¿Si tuviera un hij@ que me gustaría que fuera?",
-    opciones: ["hombre", "mujer", "no especificado", "no quiere tener hij@"],
+    opciones: [
+      "hombre",
+      "mujer",
+      "no especificado",
+      "no quiere tener hij@"
+    ],
     correcta: 1
   },
+
   {
     pregunta: "¿Que evento del año le gusta mas?",
     opciones: ["Navidad", "Cumpleaños", "Carnaval", "Hallowen"],
     correcta: 2
   },
+
   {
     pregunta: "Cosa que nunca hice",
-    opciones: ["besar a un amigo xd", "rogar", "robar", "pelear"],
+    opciones: [
+      "besar a un amigo xd",
+      "rogar",
+      "robar",
+      "pelear"
+    ],
     correcta: 0
   },
+
   {
     pregunta: "¿Cuantas veces ah llorado por amor?",
     opciones: ["1", "2", "mas de 10", "sigue llorando"],
     correcta: 2
   },
+
   {
     pregunta: "¿Si tuviera superpoderes que crees que haría?",
     opciones: [
@@ -182,6 +206,7 @@ const preguntas = [
     ],
     correcta: 3
   },
+
   {
     pregunta: "¿Tiene mejor amig@ y novia?",
     opciones: [
@@ -193,17 +218,20 @@ const preguntas = [
     correcta: 2
   },
 
-  // NUEVAS PREGUNTAS (11-17)
+  // PREGUNTAS NUEVAS (11-17)
+
   {
     pregunta: "¿Alguna vez rogué a alguien?",
     opciones: ["Sí", "No", "Tal vez"],
     correcta: 0
   },
+
   {
     pregunta: "¿Volvería con una ex?",
     opciones: ["Sí", "No", "Ya lo hice", "Recontra no"],
     correcta: 1
   },
+
   {
     pregunta: "¿Alguna vez me alejé de mis amigos por alguien?",
     opciones: [
@@ -214,6 +242,7 @@ const preguntas = [
     ],
     correcta: 1
   },
+
   {
     pregunta: "¿Qué me gustaría más hacer? (Uy, esas referencias... solo para conocedores)",
     opciones: [
@@ -224,16 +253,19 @@ const preguntas = [
     ],
     correcta: 3
   },
+
   {
     pregunta: "¿Qué sé hacer?",
     opciones: ["De todo", "Nada", "Ni mrd", "Rogar"],
     correcta: 0
   },
+
   {
     pregunta: "¿Cuál es mi segundo color favorito?",
     opciones: ["Rojo", "Verde", "Turquesa", "Morado"],
     correcta: 3
   },
+
   {
     pregunta: "¿Qué me gusta leer?",
     opciones: [
@@ -244,11 +276,13 @@ const preguntas = [
     ],
     correcta: 0
   }
+
 ];
+
+// GENERAR AUTOMÁTICAMENTE LAS 17 PREGUNTAS
 
 const formulario = document.getElementById("test");
 
-// Mostrar las 17 preguntas
 preguntas.forEach((p, i) => {
   const bloque = document.createElement("section");
   bloque.className = "question";
@@ -268,11 +302,14 @@ preguntas.forEach((p, i) => {
 
     label.appendChild(radio);
     label.appendChild(document.createTextNode(opcion));
+
     bloque.appendChild(label);
   });
 
   formulario.appendChild(bloque);
 });
+
+// CALIFICAR EL TEST
 
 function calificar() {
   const respuestas = [];
@@ -302,7 +339,9 @@ function calificar() {
   preguntas.forEach((p, i) => {
     const acierto = respuestas[i] === p.correcta;
 
-    if (acierto) puntos++;
+    if (acierto) {
+      puntos++;
+    }
 
     revision += `
       <p class="${acierto ? "correcta" : "incorrecta"}">
@@ -319,8 +358,8 @@ function calificar() {
 
   let mensaje;
 
-  if (puntos === preguntas.length) {
-    mensaje = "🏆 ¡Perfecto! Conoces a Ryan al máximo.";
+  if (puntos === 17) {
+    mensaje = "🏆 ¡PERFECTO! Conoces a Ryan al máximo.";
   } else if (puntos >= 14) {
     mensaje = "⚓ ¡Excelente! Conoces muy bien a Ryan.";
   } else if (puntos >= 10) {
@@ -332,8 +371,9 @@ function calificar() {
   const resultado = document.getElementById("resultado");
 
   resultado.style.display = "block";
+
   resultado.innerHTML = `
-    <h2>🏆 Resultado: ${puntos}/${preguntas.length}</h2>
+    <h2>🏆 Resultado: ${puntos}/17</h2>
     <p>${mensaje}</p>
     <h3>📋 Revisión de respuestas</h3>
     ${revision}
