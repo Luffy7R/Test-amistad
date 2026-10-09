@@ -1,395 +1,578 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test de amistad de Ryan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17142b">
+  <title>Test de amistad de Ryan 💙</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background: #102a43;
-  color: #fff;
-}
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #17142b, #29245b, #174c70);
+      color: #ffffff;
+      min-height: 100vh;
+    }
 
-.container {
-  max-width: 650px;
-  margin: auto;
-  padding: 22px;
-  background: #183b56;
-  border: 2px solid #75d5f0;
-  border-radius: 18px;
-}
+    .contenedor {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-h1 {
-  text-align: center;
-  color: #75d5f0;
-}
+    header {
+      text-align: center;
+      padding: 20px 10px;
+    }
 
-.subtitle {
-  text-align: center;
-  color: #d9eaf2;
-}
+    h1 {
+      font-size: clamp(27px, 6vw, 42px);
+      margin-bottom: 10px;
+    }
 
-.question {
-  margin: 22px 0;
-  padding: 16px;
-  background: #244c66;
-  border-radius: 12px;
-}
+    header p {
+      color: #d8d9ff;
+      line-height: 1.6;
+    }
 
-.question h3 {
-  margin-top: 0;
-  line-height: 1.5;
-}
+    .progreso-contenedor {
+      margin: 15px 0 25px;
+    }
 
-label {
-  display: block;
-  margin: 12px 0;
-  padding: 12px;
-  background: #315d78;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    .progreso-texto {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #e0e4ff;
+    }
 
-label:has(input:checked) {
-  background: #416f8c;
-  outline: 2px solid #75d5f0;
-}
+    .barra {
+      height: 9px;
+      background: #454367;
+      border-radius: 20px;
+      overflow: hidden;
+    }
 
-input {
-  margin-right: 8px;
-}
+    #barraProgreso {
+      height: 100%;
+      width: 0%;
+      background: #7de3ff;
+      border-radius: 20px;
+      transition: width 0.25s ease;
+    }
 
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 10px;
-  background: #75d5f0;
-  color: #102a43;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .pregunta {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
 
-button:hover {
-  background: #a0e7f8;
-}
+    .pregunta h2 {
+      font-size: 19px;
+      line-height: 1.5;
+      margin: 0 0 15px;
+    }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+    .numero {
+      color: #7de3ff;
+      font-weight: bold;
+    }
 
-#resultado {
-  display: none;
-  margin-top: 25px;
-  padding: 18px;
-  background: #102a43;
-  border-radius: 12px;
-  overflow-wrap: anywhere;
-}
+    .opcion {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px;
+      margin: 9px 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      background: rgba(10, 10, 30, 0.22);
+      cursor: pointer;
+      line-height: 1.45;
+      transition: background 0.2s, border-color 0.2s;
+    }
 
-.correcta {
-  color: #7dffb3;
-}
+    .opcion:hover {
+      background: rgba(125, 227, 255, 0.12);
+      border-color: #7de3ff;
+    }
 
-.incorrecta {
-  color: #ffaaaa;
-}
-</style>
+    .opcion input {
+      margin-top: 3px;
+      flex-shrink: 0;
+      accent-color: #7de3ff;
+      width: 17px;
+      height: 17px;
+    }
+
+    .botones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    button {
+      border: none;
+      border-radius: 11px;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 3px;
+    }
+
+    .principal {
+      background: #7de3ff;
+      color: #15152d;
+      flex: 1;
+    }
+
+    .secundario {
+      background: #39365f;
+      color: white;
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    #resultado {
+      display: none;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 22px;
+      margin: 25px 0;
+      overflow-wrap: anywhere;
+    }
+
+    #resultado h2 {
+      color: #7de3ff;
+    }
+
+    .revision {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      line-height: 1.6;
+    }
+
+    .correcta {
+      color: #8dffb2;
+    }
+
+    .incorrecta {
+      color: #ffaaaa;
+    }
+
+    .pie {
+      text-align: center;
+      font-size: 13px;
+      color: #c5c8ed;
+      padding: 20px 0;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .pregunta {
+        padding: 16px;
+      }
+
+      .botones button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <main class="contenedor">
 
-<div class="container">
+    <header>
+      <h1>💙 Test de amistad de Ryan 💙</h1>
+      <p>
+        ¿Cuánto me conoces de verdad?<br>
+        Responde las 17 preguntas y descubre tu puntuación.
+      </p>
+    </header>
 
-  <h1>☠️ Test de amistad de Ryan ☠️</h1>
+    <div class="progreso-contenedor">
+      <div class="progreso-texto">
+        <span id="contador">0 de 17 respondidas</span>
+        <span>17 preguntas</span>
+      </div>
+      <div
+        class="barra"
+        role="progressbar"
+        aria-label="Progreso del test"
+        aria-valuemin="0"
+        aria-valuemax="17"
+        aria-valuenow="0"
+        id="barraContenedor"
+      >
+        <div id="barraProgreso"></div>
+      </div>
+    </div>
 
-  <p class="subtitle">
-    ¿Cuánto conoces realmente a Ryan? ¡Demuéstralo!
-  </p>
+    <form id="formulario">
+      <div id="listaPreguntas"></div>
 
-  <form id="test"></form>
+      <div class="botones">
+        <button type="button" class="secundario" id="limpiar">
+          Borrar respuestas
+        </button>
+        <button type="submit" class="principal">
+          Terminar test y ver resultado
+        </button>
+      </div>
+    </form>
 
-  <button id="enviar" type="button" onclick="calificar()">
-    ⚓ Terminar test
-  </button>
+    <section id="resultado" aria-live="polite" tabindex="-1"></section>
 
-  <div id="resultado" aria-live="polite"></div>
+    <div class="pie">
+      Hecho con 💙 para poner a prueba tu amistad con Ryan.
+    </div>
 
-</div>
+  </main>
 
-<script>
-const preguntas = [
+  <script>
+    "use strict";
 
-  // PREGUNTAS ORIGINALES (1-10)
+    // LAS 17 PREGUNTAS Y SUS RESPUESTAS CORRECTAS
+    // La respuesta correcta se identifica contando desde 0:
+    // 0 = primera opción, 1 = segunda, 2 = tercera, etc.
 
-  {
-    pregunta: "¿Superheroe favorito?",
-    opciones: ["luffy", "superman", "Spiderman", "Iron man"],
-    correcta: 2
-  },
+    const preguntas = [
+      {
+        pregunta: "¿Superhéroe favorito?",
+        opciones: ["Luffy", "Superman", "Spiderman", "Iron Man"],
+        correcta: 2
+      },
+      {
+        pregunta: "¿Persona que más he amado? (No familia)",
+        opciones: ["Una ex", "Messi", "Luffy", "Keiko"],
+        correcta: 1
+      },
+      {
+        pregunta: "¿Cuántas de mis mascotas fueron elegidas por mí?",
+        opciones: ["1", "2", "Todas", "Ninguna"],
+        correcta: 3
+      },
+      {
+        pregunta: "¿Crees que en verdad es serrucho, infiel o el peor hombre del mundo?",
+        opciones: [
+          "Sí",
+          "No",
+          "Tal vez",
+          "A mí me serruchó (decir nombre al priv)"
+        ],
+        correcta: 1
+      },
+      {
+        pregunta: "Si tuviera un hij@, ¿qué me gustaría que fuera?",
+        opciones: [
+          "Hombre",
+          "Mujer",
+          "No especificado",
+          "No quiere tener hij@"
+        ],
+        correcta: 1
+      },
+      {
+        pregunta: "¿Qué evento del año le gusta más?",
+        opciones: ["Navidad", "Cumpleaños", "Carnaval", "Halloween"],
+        correcta: 2
+      },
+      {
+        pregunta: "Cosa que nunca hice",
+        opciones: [
+          "Besar a un amigo xd",
+          "Rogar",
+          "Robar",
+          "Pelear"
+        ],
+        correcta: 0
+      },
+      {
+        pregunta: "¿Cuántas veces ha llorado por amor?",
+        opciones: ["1", "2", "Más de 10", "Sigue llorando"],
+        correcta: 2
+      },
+      {
+        pregunta: "Si tuviera superpoderes, ¿qué crees que haría?",
+        opciones: [
+          "Salvar el mundo",
+          "Destruir el mundo",
+          "Construir un mundo con ella",
+          "Divertirse"
+        ],
+        correcta: 3
+      },
+      {
+        pregunta: "¿Tiene mejor amig@ y novia?",
+        opciones: [
+          "Sí",
+          "No",
+          "Tiene mejor amig@ pero novia no",
+          "Tiene novia pero mejor amig@ no"
+        ],
+        correcta: 2
+      },
+      {
+        pregunta: "¿Alguna vez rogué a alguien?",
+        opciones: ["Sí", "No", "Tal vez"],
+        correcta: 0
+      },
+      {
+        pregunta: "¿Volvería con una ex?",
+        opciones: ["Sí", "No", "Ya lo hice", "Recontra no"],
+        correcta: 1
+      },
+      {
+        pregunta: "¿Alguna vez me alejé de mis amigos por alguien?",
+        opciones: [
+          "Sí",
+          "No",
+          "Tal vez",
+          "¿Todavía lo preguntas?"
+        ],
+        correcta: 1
+      },
+      {
+        pregunta: "¿Qué me gustaría más hacer? (Uy esas referencias.. solo para conocedores)",
+        opciones: [
+          "Viajar a Tarapoto",
+          "Vender gaseosa",
+          "Ver a Messi",
+          "Ninguna de las anteriores"
+        ],
+        correcta: 3
+      },
+      {
+        pregunta: "¿Qué sabe hacer?",
+        opciones: ["De todo", "Nada", "Ni mrd", "Rogar"],
+        correcta: 0
+      },
+      {
+        pregunta: "¿Segundo color favorito?",
+        opciones: ["Rojo", "Verde", "Turquesa", "Morado"],
+        correcta: 3
+      },
+      {
+        pregunta: "¿Qué le gusta leer?",
+        opciones: [
+          "Revistas científicas",
+          "Manga",
+          "Periódico",
+          "Mensajes de su ex"
+        ],
+        correcta: 0
+      }
+    ];
 
-  {
-    pregunta: "¿Persona que mas he amado? (No familia)",
-    opciones: ["Una ex", "Messi", "Luffy", "Keiko"],
-    correcta: 1
-  },
+    const formulario = document.getElementById("formulario");
+    const listaPreguntas = document.getElementById("listaPreguntas");
+    const contador = document.getElementById("contador");
+    const barraProgreso = document.getElementById("barraProgreso");
+    const barraContenedor = document.getElementById("barraContenedor");
+    const resultado = document.getElementById("resultado");
+    const botonLimpiar = document.getElementById("limpiar");
 
-  {
-    pregunta: "¿Cuantas de mis mascotas fueron elegidas por mi?",
-    opciones: ["1", "2", "todas", "Ninguna"],
-    correcta: 3
-  },
+    // Comprobación para evitar publicar una lista incompleta.
+    if (preguntas.length !== 17) {
+      listaPreguntas.textContent =
+        "Error: el test debe contener exactamente 17 preguntas.";
+      throw new Error(
+        "El test debe contener 17 preguntas, pero contiene " +
+        preguntas.length
+      );
+    }
 
-  {
-    pregunta: "¿Crees que en verdad es serrucho, infiel o el peor hombre del mundo?",
-    opciones: [
-      "Si",
-      "No",
-      "tal vez",
-      "a mi me serrucho (decir nombre al priv)"
-    ],
-    correcta: 1
-  },
+    // Generar las 17 preguntas automáticamente.
+    preguntas.forEach((item, indice) => {
+      const bloque = document.createElement("section");
+      bloque.className = "pregunta";
 
-  {
-    pregunta: "¿Si tuviera un hij@ que me gustaría que fuera?",
-    opciones: [
-      "hombre",
-      "mujer",
-      "no especificado",
-      "no quiere tener hij@"
-    ],
-    correcta: 1
-  },
+      const titulo = document.createElement("h2");
+      const numero = document.createElement("span");
+      numero.className = "numero";
+      numero.textContent = "Pregunta " + (indice + 1) + " de 17: ";
 
-  {
-    pregunta: "¿Que evento del año le gusta mas?",
-    opciones: ["Navidad", "Cumpleaños", "Carnaval", "Hallowen"],
-    correcta: 2
-  },
+      titulo.appendChild(numero);
+      titulo.appendChild(document.createTextNode(item.pregunta));
+      bloque.appendChild(titulo);
 
-  {
-    pregunta: "Cosa que nunca hice",
-    opciones: [
-      "besar a un amigo xd",
-      "rogar",
-      "robar",
-      "pelear"
-    ],
-    correcta: 0
-  },
+      item.opciones.forEach((opcion, indiceOpcion) => {
+        const etiqueta = document.createElement("label");
+        etiqueta.className = "opcion";
 
-  {
-    pregunta: "¿Cuantas veces ah llorado por amor?",
-    opciones: ["1", "2", "mas de 10", "sigue llorando"],
-    correcta: 2
-  },
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "pregunta" + indice;
+        radio.value = String(indiceOpcion);
+        radio.required = true;
 
-  {
-    pregunta: "¿Si tuviera superpoderes que crees que haría?",
-    opciones: [
-      "salvar el mundo",
-      "destruir el mundo",
-      "construir un mundo con ella",
-      "Divertirse"
-    ],
-    correcta: 3
-  },
+        radio.addEventListener("change", actualizarProgreso);
 
-  {
-    pregunta: "¿Tiene mejor amig@ y novia?",
-    opciones: [
-      "Si",
-      "No",
-      "tiene mejor amig@ pero novia no",
-      "tiene novia pero mejor amig@ no"
-    ],
-    correcta: 2
-  },
+        const texto = document.createElement("span");
+        texto.textContent = opcion;
 
-  // PREGUNTAS NUEVAS (11-17)
-
-  {
-    pregunta: "¿Alguna vez rogué a alguien?",
-    opciones: ["Sí", "No", "Tal vez"],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Volvería con una ex?",
-    opciones: ["Sí", "No", "Ya lo hice", "Recontra no"],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Alguna vez me alejé de mis amigos por alguien?",
-    opciones: [
-      "Sí",
-      "No",
-      "Tal vez",
-      "¿Todavía lo preguntas?"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué me gustaría más hacer? (Uy, esas referencias... solo para conocedores)",
-    opciones: [
-      "Viajar a Tarapoto",
-      "Vender gaseosa",
-      "Ver a Messi",
-      "Ninguna de las anteriores"
-    ],
-    correcta: 3
-  },
-
-  {
-    pregunta: "¿Qué sé hacer?",
-    opciones: ["De todo", "Nada", "Ni mrd", "Rogar"],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Cuál es mi segundo color favorito?",
-    opciones: ["Rojo", "Verde", "Turquesa", "Morado"],
-    correcta: 3
-  },
-
-  {
-    pregunta: "¿Qué me gusta leer?",
-    opciones: [
-      "Revistas científicas",
-      "Manga",
-      "Periódico",
-      "Mensajes de su ex"
-    ],
-    correcta: 0
-  }
-
-];
-
-// GENERAR AUTOMÁTICAMENTE LAS 17 PREGUNTAS
-
-const formulario = document.getElementById("test");
-
-preguntas.forEach((p, i) => {
-  const bloque = document.createElement("section");
-  bloque.className = "question";
-
-  const titulo = document.createElement("h3");
-  titulo.textContent = `${i + 1}. ${p.pregunta}`;
-  bloque.appendChild(titulo);
-
-  p.opciones.forEach((opcion, j) => {
-    const label = document.createElement("label");
-    const radio = document.createElement("input");
-
-    radio.type = "radio";
-    radio.name = `pregunta${i}`;
-    radio.value = j;
-    radio.required = true;
-
-    label.appendChild(radio);
-    label.appendChild(document.createTextNode(opcion));
-
-    bloque.appendChild(label);
-  });
-
-  formulario.appendChild(bloque);
-});
-
-// CALIFICAR EL TEST
-
-function calificar() {
-  const respuestas = [];
-
-  for (let i = 0; i < preguntas.length; i++) {
-    const seleccionada = document.querySelector(
-      `input[name="pregunta${i}"]:checked`
-    );
-
-    if (!seleccionada) {
-      alert(`¡Te falta responder la pregunta ${i + 1}!`);
-
-      document.querySelectorAll(".question")[i].scrollIntoView({
-        behavior: "smooth",
-        block: "center"
+        etiqueta.appendChild(radio);
+        etiqueta.appendChild(texto);
+        bloque.appendChild(etiqueta);
       });
 
-      return;
-    }
+      listaPreguntas.appendChild(bloque);
+    });
 
-    respuestas.push(Number(seleccionada.value));
-  }
+    function actualizarProgreso() {
+      let respondidas = 0;
 
-  let puntos = 0;
-  let revision = "";
+      preguntas.forEach((item, indice) => {
+        const seleccionada = formulario.querySelector(
+          'input[name="pregunta' + indice + '"]:checked'
+        );
 
-  preguntas.forEach((p, i) => {
-    const acierto = respuestas[i] === p.correcta;
-
-    if (acierto) {
-      puntos++;
-    }
-
-    revision += `
-      <p class="${acierto ? "correcta" : "incorrecta"}">
-        <strong>${i + 1}. ${p.pregunta}</strong><br>
-        Tu respuesta: ${p.opciones[respuestas[i]]}<br>
-        ${
-          acierto
-            ? "✅ ¡Correcto!"
-            : "❌ Respuesta correcta: " + p.opciones[p.correcta]
+        if (seleccionada) {
+          respondidas++;
         }
-      </p>
-    `;
-  });
+      });
 
-  let mensaje;
+      contador.textContent = respondidas + " de 17 respondidas";
 
-  if (puntos === 17) {
-    mensaje = "🏆 ¡PERFECTO! Conoces a Ryan al máximo.";
-  } else if (puntos >= 14) {
-    mensaje = "⚓ ¡Excelente! Conoces muy bien a Ryan.";
-  } else if (puntos >= 10) {
-    mensaje = "🏴‍☠️ Vas bien, pero todavía te falta conocerlo.";
-  } else {
-    mensaje = "💀 ¡Necesitas conocer mejor a Ryan!";
-  }
+      barraProgreso.style.width =
+        ((respondidas / 17) * 100) + "%";
 
-  const resultado = document.getElementById("resultado");
+      barraContenedor.setAttribute("aria-valuenow", respondidas);
+    }
 
-  resultado.style.display = "block";
+    // Calcular puntuación y mostrar la revisión.
+    formulario.addEventListener("submit", function(evento) {
+      evento.preventDefault();
 
-  resultado.innerHTML = `
-    <h2>🏆 Resultado: ${puntos}/17</h2>
-    <p>${mensaje}</p>
-    <h3>📋 Revisión de respuestas</h3>
-    ${revision}
-    <button type="button" onclick="location.reload()">
-      🔄 Volver a jugar
-    </button>
-  `;
+      let puntuacion = 0;
+      let revisionHTML = "";
 
-  document.getElementById("enviar").disabled = true;
+      preguntas.forEach((item, indice) => {
+        const seleccionada = formulario.querySelector(
+          'input[name="pregunta' + indice + '"]:checked'
+        );
 
-  resultado.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}
-</script>
+        const respuestaUsuario = Number(seleccionada.value);
+        const acerto = respuestaUsuario === item.correcta;
 
+        if (acerto) {
+          puntuacion++;
+        }
+
+        const respuestaCorrecta = item.opciones[item.correcta];
+        const respuestaElegida = item.opciones[respuestaUsuario];
+
+        revisionHTML += `
+          <div class="revision">
+            <strong>${indice + 1}. ${escaparHTML(item.pregunta)}</strong><br>
+            <span class="${acerto ? "correcta" : "incorrecta"}">
+              ${acerto ? "✓ Correcto" : "✗ Incorrecto"}
+            </span><br>
+            Tu respuesta: ${escaparHTML(respuestaElegida)}<br>
+            Respuesta correcta: ${escaparHTML(respuestaCorrecta)}
+          </div>
+        `;
+      });
+
+      const porcentaje = Math.round((puntuacion / 17) * 100);
+      let mensaje;
+
+      if (puntuacion === 17) {
+        mensaje = "¡Perfecto! ¡Conoces a Ryan de maravilla! 🏆";
+      } else if (puntuacion >= 14) {
+        mensaje = "¡Excelente! Conoces muy bien a Ryan. 💙";
+      } else if (puntuacion >= 10) {
+        mensaje = "¡Bien! Pero todavía hay cosas que aprender. 😎";
+      } else if (puntuacion >= 5) {
+        mensaje = "Te falta conocer un poco más a Ryan. 😂";
+      } else {
+        mensaje = "¡Necesitas estudiar más a Ryan! 🤣";
+      }
+
+      resultado.innerHTML = `
+        <h2>🎉 ¡Test terminado!</h2>
+        <p style="font-size: 32px; font-weight: bold;">
+          ${puntuacion} / 17
+        </p>
+        <p>${porcentaje}% de respuestas correctas.</p>
+        <p>${mensaje}</p>
+        <h3>Revisión de tus respuestas</h3>
+        ${revisionHTML}
+        <button type="button" class="principal" id="reintentar">
+          Intentar de nuevo
+        </button>
+      `;
+
+      resultado.style.display = "block";
+      resultado.focus();
+      resultado.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      document.getElementById("reintentar").addEventListener(
+        "click",
+        reiniciarTest
+      );
+    });
+
+    // Evitar que los textos de las preguntas se interpreten como HTML.
+    function escaparHTML(texto) {
+      return String(texto).replace(/[&<>"']/g, function(caracter) {
+        const entidades = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        };
+
+        return entidades[caracter];
+      });
+    }
+
+    function reiniciarTest() {
+      formulario.reset();
+      resultado.style.display = "none";
+      resultado.innerHTML = "";
+      actualizarProgreso();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    botonLimpiar.addEventListener("click", function() {
+      reiniciarTest();
+    });
+
+    // Confirmar visualmente que se cargaron las 17 preguntas.
+    contador.textContent = "0 de " + preguntas.length + " respondidas";
+  </script>
 </body>
 </html>
