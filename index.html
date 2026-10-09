@@ -2,14 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#17142b">
   <title>Test de amistad de Ryan 💙</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -31,19 +29,14 @@
       padding: 18px 5px;
     }
 
-    h1 {
-      font-size: clamp(27px, 6vw, 42px);
-      margin-bottom: 10px;
-    }
+    h1 { font-size: clamp(27px, 6vw, 42px); }
 
     header p {
       color: #d8d9ff;
       line-height: 1.6;
     }
 
-    .progreso-contenedor {
-      margin: 18px 0 24px;
-    }
+    .progreso-contenedor { margin: 18px 0 24px; }
 
     .progreso-texto {
       display: flex;
@@ -123,20 +116,10 @@
       cursor: pointer;
     }
 
-    button:focus-visible {
-      outline: 3px solid white;
-      outline-offset: 3px;
-    }
-
     .principal {
       background: #7de3ff;
       color: #15152d;
       width: 100%;
-    }
-
-    button:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
     }
 
     #resultado {
@@ -149,9 +132,7 @@
       overflow-wrap: anywhere;
     }
 
-    #resultado h2 {
-      color: #7de3ff;
-    }
+    #resultado h2 { color: #7de3ff; }
 
     .revision {
       padding: 14px 0;
@@ -159,37 +140,20 @@
       line-height: 1.7;
     }
 
-    .correcta {
-      color: #8dffb2;
-    }
+    .correcta { color: #8dffb2; }
+    .incorrecta { color: #ffaaaa; }
 
-    .incorrecta {
-      color: #ffaaaa;
-    }
-
-    .aviso {
+    .aviso, .pie {
+      text-align: center;
       font-size: 13px;
       color: #c5c8ed;
-      text-align: center;
       line-height: 1.5;
       margin: 20px 0;
     }
 
-    .pie {
-      text-align: center;
-      font-size: 13px;
-      color: #c5c8ed;
-      padding: 20px 0;
-    }
-
     @media (max-width: 480px) {
-      body {
-        padding: 12px;
-      }
-
-      .pregunta {
-        padding: 16px;
-      }
+      body { padding: 12px; }
+      .pregunta { padding: 16px; }
     }
   </style>
 </head>
@@ -209,23 +173,16 @@
         <span id="contador">0 de 17 respondidas</span>
         <span>17 preguntas</span>
       </div>
-
-      <div
-        class="barra"
-        role="progressbar"
-        aria-label="Progreso del test"
-        aria-valuemin="0"
-        aria-valuemax="17"
-        aria-valuenow="0"
-        id="barraContenedor"
-      >
+      <div class="barra" role="progressbar"
+           aria-label="Progreso del test"
+           aria-valuemin="0" aria-valuemax="17"
+           aria-valuenow="0" id="barraContenedor">
         <div id="barraProgreso"></div>
       </div>
     </div>
 
     <form id="formulario">
       <div id="listaPreguntas"></div>
-
       <button type="submit" class="principal" id="botonTerminar">
         Terminar test y ver resultado
       </button>
@@ -265,9 +222,7 @@
       {
         pregunta: "¿Crees que en verdad es serrucho, infiel o el peor hombre del mundo?",
         opciones: [
-          "Sí",
-          "No",
-          "Tal vez",
+          "Sí", "No", "Tal vez",
           "A mí me serruchó (decir nombre al priv)"
         ],
         correcta: 1
@@ -275,10 +230,7 @@
       {
         pregunta: "Si tuviera un hij@, ¿qué me gustaría que fuera?",
         opciones: [
-          "Hombre",
-          "Mujer",
-          "No especificado",
-          "No quiere tener hij@"
+          "Hombre", "Mujer", "No especificado", "No quiere tener hij@"
         ],
         correcta: 1
       },
@@ -289,12 +241,7 @@
       },
       {
         pregunta: "Cosa que nunca hice",
-        opciones: [
-          "Besar a un amigo xd",
-          "Rogar",
-          "Robar",
-          "Pelear"
-        ],
+        opciones: ["Besar a un amigo xd", "Rogar", "Robar", "Pelear"],
         correcta: 0
       },
       {
@@ -305,18 +252,15 @@
       {
         pregunta: "Si tuviera superpoderes, ¿qué crees que haría?",
         opciones: [
-          "Salvar el mundo",
-          "Destruir el mundo",
-          "Construir un mundo con ella",
-          "Divertirse"
+          "Salvar el mundo", "Destruir el mundo",
+          "Construir un mundo con ella", "Divertirse"
         ],
         correcta: 3
       },
       {
         pregunta: "¿Tiene mejor amig@ y novia?",
         opciones: [
-          "Sí",
-          "No",
+          "Sí", "No",
           "Tiene mejor amig@ pero novia no",
           "Tiene novia pero mejor amig@ no"
         ],
@@ -334,12 +278,7 @@
       },
       {
         pregunta: "¿Alguna vez me alejé de mis amigos por alguien?",
-        opciones: [
-          "Sí",
-          "No",
-          "Tal vez",
-          "¿Todavía lo preguntas?"
-        ],
+        opciones: ["Sí", "No", "Tal vez", "¿Todavía lo preguntas?"],
         correcta: 1
       },
       {
@@ -365,10 +304,8 @@
       {
         pregunta: "¿Qué le gusta leer?",
         opciones: [
-          "Revistas científicas",
-          "Manga",
-          "Periódico",
-          "Mensajes de su ex"
+          "Revistas científicas", "Manga",
+          "Periódico", "Mensajes de su ex"
         ],
         correcta: 0
       }
@@ -379,7 +316,6 @@
     }
 
     const CLAVE_TEST = "testAmistadRyan_v1";
-
     const formulario = document.getElementById("formulario");
     const listaPreguntas = document.getElementById("listaPreguntas");
     const contador = document.getElementById("contador");
@@ -391,15 +327,11 @@
     let testTerminado = false;
 
     function escaparHTML(texto) {
-      return String(texto).replace(/[&<>"']/g, function(caracter) {
-        const entidades = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        };
-        return entidades[caracter];
+      return String(texto).replace(/[&<>"']/g, function(c) {
+        return {
+          "&": "&amp;", "<": "&lt;", ">": "&gt;",
+          '"': "&quot;", "'": "&#39;"
+        }[c];
       });
     }
 
@@ -435,9 +367,7 @@
 
     function actualizarProgreso() {
       const respuestas = obtenerRespuestas();
-      const respondidas = respuestas.filter(
-        respuesta => respuesta !== null
-      ).length;
+      const respondidas = respuestas.filter(r => r !== null).length;
 
       contador.textContent = respondidas + " de 17 respondidas";
       barraProgreso.style.width = (respondidas / 17 * 100) + "%";
@@ -488,7 +418,7 @@
     function mostrarResultado() {
       const respuestas = obtenerRespuestas();
 
-      if (respuestas.some(respuesta => respuesta === null)) {
+      if (respuestas.some(r => r === null)) {
         testTerminado = false;
         guardarProgreso();
         return;
@@ -516,8 +446,8 @@
       });
 
       const porcentaje = Math.round(puntuacion / 17 * 100);
-
       let mensaje;
+
       if (puntuacion === 17) {
         mensaje = "¡Perfecto! ¡Conoces a Ryan de maravilla! 🏆";
       } else if (puntuacion >= 14) {
@@ -542,10 +472,10 @@
         </p>
       `;
 
-      resultado.style.display = "block";
-      formulario.style.display = "none";
       testTerminado = true;
       guardarProgreso();
+      formulario.style.display = "none";
+      resultado.style.display = "block";
     }
 
     function cargarProgreso() {
@@ -577,12 +507,9 @@
 
       actualizarProgreso();
 
-      if (datos.terminado) {
-        const respuestas = obtenerRespuestas();
-
-        if (respuestas.every(respuesta => respuesta !== null)) {
-          mostrarResultado();
-        }
+      if (datos.terminado &&
+          obtenerRespuestas().every(r => r !== null)) {
+        mostrarResultado();
       }
     }
 
@@ -593,25 +520,22 @@
 
       const respuestas = obtenerRespuestas();
 
-      if (respuestas.some(respuesta => respuesta === null)) {
-        const primeraSinResponder = preguntas.findIndex(
-          (pregunta, indice) => respuestas[indice] === null
-        );
+      if (respuestas.some(r => r === null)) {
+        const indice = respuestas.findIndex(r => r === null);
+        const bloque = listaPreguntas.children[indice];
 
-        const bloque = listaPreguntas.children[primeraSinResponder];
-        const radio = bloque.querySelector("input");
-
-        radio.focus();
         bloque.scrollIntoView({
           behavior: "smooth",
           block: "center"
         });
 
+        bloque.querySelector("input").focus();
         alert("Responde las 17 preguntas antes de terminar el test.");
         return;
       }
 
       mostrarResultado();
+
       resultado.focus();
       resultado.scrollIntoView({
         behavior: "smooth",
