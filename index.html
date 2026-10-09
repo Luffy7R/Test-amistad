@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -56,6 +55,7 @@ label {
   background: #315d78;
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 label:has(input:checked) {
@@ -80,8 +80,13 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background: #a0e7f8;
+}
+
 button:disabled {
   opacity: 0.6;
+  cursor: not-allowed;
 }
 
 #resultado {
@@ -90,6 +95,7 @@ button:disabled {
   padding: 18px;
   background: #102a43;
   border-radius: 12px;
+  overflow-wrap: anywhere;
 }
 
 .correcta {
@@ -103,8 +109,10 @@ button:disabled {
 </head>
 
 <body>
+
 <div class="container">
   <h1>☠️ Test de amistad de Ryan ☠️</h1>
+
   <p class="subtitle">
     ¿Cuánto conoces realmente a Ryan? ¡Demuéstralo!
   </p>
@@ -115,18 +123,18 @@ button:disabled {
     ⚓ Terminar test
   </button>
 
-  <div id="resultado"></div>
+  <div id="resultado" aria-live="polite"></div>
 </div>
 
 <script>
 const preguntas = [
   {
-    pregunta: "¿Superhéroe favorito?",
+    pregunta: "¿Cuál es mi superhéroe favorito?",
     opciones: ["Luffy", "Superman", "Spiderman", "Iron Man"],
     correcta: 2
   },
   {
-    pregunta: "¿Persona que más he amado? (No familia)",
+    pregunta: "¿Qué persona he amado más? (No cuenta la familia)",
     opciones: ["Una ex", "Messi", "Luffy", "Keiko"],
     correcta: 1
   },
@@ -136,18 +144,23 @@ const preguntas = [
     correcta: 3
   },
   {
-    pregunta: "¿Crees que en verdad soy serrucho, infiel o el peor hombre del mundo?",
+    pregunta: "¿De verdad crees que soy serrucho, infiel o el peor hombre del mundo?",
     opciones: [
       "Sí",
       "No",
       "Tal vez",
-      "A mí me serruchó (decir nombre al privado)"
+      "A mí me serruchó (di el nombre al privado)"
     ],
     correcta: 1
   },
   {
     pregunta: "Si tuviera un hij@, ¿qué me gustaría que fuera?",
-    opciones: ["Hombre", "Mujer", "No especificado", "No quiere tener hij@"],
+    opciones: [
+      "Hombre",
+      "Mujer",
+      "No especificado",
+      "No quiere tener hij@"
+    ],
     correcta: 1
   },
   {
@@ -156,7 +169,7 @@ const preguntas = [
     correcta: 2
   },
   {
-    pregunta: "Cosa que nunca hice:",
+    pregunta: "¿Qué cosa nunca he hecho?",
     opciones: [
       "Besar a un amigo xd",
       "Rogar",
@@ -167,7 +180,7 @@ const preguntas = [
   },
   {
     pregunta: "¿Cuántas veces he llorado por amor?",
-    opciones: ["1", "2", "Más de 10", "Sigue llorando"],
+    opciones: ["1", "2", "Más de 10", "Sigo llorando"],
     correcta: 2
   },
   {
@@ -194,6 +207,7 @@ const preguntas = [
 
 const formulario = document.getElementById("test");
 
+// Crear automáticamente las 10 preguntas
 preguntas.forEach((p, i) => {
   const bloque = document.createElement("section");
   bloque.className = "question";
@@ -213,6 +227,7 @@ preguntas.forEach((p, i) => {
 
     label.appendChild(radio);
     label.appendChild(document.createTextNode(opcion));
+
     bloque.appendChild(label);
   });
 
@@ -222,6 +237,7 @@ preguntas.forEach((p, i) => {
 function calificar() {
   const respuestas = [];
 
+  // Comprobar que todas las preguntas estén respondidas
   for (let i = 0; i < preguntas.length; i++) {
     const seleccionada = document.querySelector(
       `input[name="pregunta${i}"]:checked`
@@ -229,10 +245,12 @@ function calificar() {
 
     if (!seleccionada) {
       alert(`¡Te falta responder la pregunta ${i + 1}!`);
+
       document.querySelectorAll(".question")[i].scrollIntoView({
         behavior: "smooth",
         block: "center"
       });
+
       return;
     }
 
@@ -242,29 +260,36 @@ function calificar() {
   let puntos = 0;
   let revision = "";
 
+  // Revisar las respuestas
   preguntas.forEach((p, i) => {
     const acierto = respuestas[i] === p.correcta;
 
-    if (acierto) puntos++;
+    if (acierto) {
+      puntos++;
+    }
 
     revision += `
       <p class="${acierto ? "correcta" : "incorrecta"}">
         <strong>${i + 1}. ${p.pregunta}</strong><br>
         Tu respuesta: ${p.opciones[respuestas[i]]}<br>
-        ${acierto ? "✅ ¡Correcto!" :
-          "❌ Correcta: " + p.opciones[p.correcta]}
+        ${
+          acierto
+            ? "✅ ¡Respuesta correcta!"
+            : "❌ Respuesta correcta: " + p.opciones[p.correcta]
+        }
       </p>
     `;
   });
 
+  // Mensaje según la puntuación
   let mensaje;
 
   if (puntos === 10) {
     mensaje = "🏆 ¡Perfecto! Conoces a Ryan al máximo.";
   } else if (puntos >= 8) {
-    mensaje = "⚓ ¡Muy bien! Conoces bastante a Ryan.";
+    mensaje = "⚓ ¡Excelente! Conoces muy bien a Ryan.";
   } else if (puntos >= 6) {
-    mensaje = "🏴‍☠️ Vas bien, pero aún te falta conocerlo.";
+    mensaje = "🏴‍☠️ Vas bien, pero todavía te falta conocerlo.";
   } else {
     mensaje = "💀 ¡Necesitas conocer mejor a Ryan!";
   }
@@ -273,16 +298,23 @@ function calificar() {
 
   resultado.style.display = "block";
   resultado.innerHTML = `
-    <h2>Resultado: ${puntos}/10</h2>
+    <h2>🏆 Resultado: ${puntos}/10</h2>
     <p>${mensaje}</p>
-    <h3>Revisión de respuestas</h3>
+    <h3>📋 Revisión de respuestas</h3>
     ${revision}
-    <button onclick="location.reload()">Volver a jugar</button>
+    <button type="button" onclick="location.reload()">
+      🔄 Volver a jugar
+    </button>
   `;
 
   document.getElementById("enviar").disabled = true;
-  resultado.scrollIntoView({ behavior: "smooth" });
+
+  resultado.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 </script>
+
 </body>
 </html>
