@@ -1,550 +1,483 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#17142b">
-  <title>Test de amistad de Ryan 💙</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de amistad de Ryan 🏴‍☠️</title>
 
-  <style>
-    * { box-sizing: border-box; }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      padding: 18px;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #17142b, #29245b, #174c70);
-      color: white;
-      min-height: 100vh;
-    }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #102a43;
+            color: #ffffff;
+        }
 
-    .contenedor {
-      width: 100%;
-      max-width: 800px;
-      margin: auto;
-    }
+        header {
+            text-align: center;
+            padding: 25px 10px;
+        }
 
-    header {
-      text-align: center;
-      padding: 18px 5px;
-    }
+        header h1 {
+            color: #75d5f0;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
 
-    h1 { font-size: clamp(27px, 6vw, 42px); }
+        header p {
+            color: #d9f3ff;
+            font-size: 16px;
+            line-height: 1.6;
+        }
 
-    header p {
-      color: #d8d9ff;
-      line-height: 1.6;
-    }
+        .bandera {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
 
-    .progreso-contenedor { margin: 18px 0 24px; }
+        .contenedor {
+            max-width: 750px;
+            margin: auto;
+            padding: 25px;
+            background: #183b56;
+            border: 2px solid #75d5f0;
+            border-radius: 18px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
 
-    .progreso-texto {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #e0e4ff;
-    }
+        .introduccion {
+            text-align: center;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #e4f7ff;
+        }
 
-    .barra {
-      height: 9px;
-      background: #454367;
-      border-radius: 20px;
-      overflow: hidden;
-    }
+        .pregunta {
+            background: #244c66;
+            padding: 18px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border: 1px solid #75d5f0;
+        }
 
-    #barraProgreso {
-      height: 100%;
-      width: 0%;
-      background: #7de3ff;
-      border-radius: 20px;
-      transition: width 0.25s;
-    }
+        .pregunta h3 {
+            color: #75d5f0;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 17px;
+        }
 
-    .pregunta {
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 17px;
-    }
+        .opcion {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #315d78;
+            padding: 12px;
+            margin: 9px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
 
-    .pregunta h2 {
-      font-size: 19px;
-      line-height: 1.5;
-      margin: 0 0 15px;
-    }
+        .opcion:hover {
+            background: #417795;
+        }
 
-    .numero {
-      color: #7de3ff;
-      font-weight: bold;
-    }
+        .opcion input {
+            margin-top: 3px;
+            accent-color: #75d5f0;
+            cursor: pointer;
+        }
 
-    .opcion {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 13px;
-      margin: 9px 0;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 10px;
-      background: rgba(10,10,30,0.22);
-      cursor: pointer;
-      line-height: 1.45;
-    }
+        .opcion span {
+            line-height: 1.4;
+        }
 
-    .opcion:hover {
-      background: rgba(125,227,255,0.12);
-      border-color: #7de3ff;
-    }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+            background: #75d5f0;
+            color: #102a43;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
 
-    .opcion input {
-      margin-top: 3px;
-      flex-shrink: 0;
-      accent-color: #7de3ff;
-      width: 17px;
-      height: 17px;
-    }
+        button:hover {
+            background: #a1e8fa;
+            transform: scale(1.02);
+        }
 
-    button {
-      border: 0;
-      border-radius: 11px;
-      padding: 14px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        #resultado {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            text-align: center;
+            background: #244c66;
+            border: 2px solid #75d5f0;
+            border-radius: 12px;
+        }
 
-    .principal {
-      background: #7de3ff;
-      color: #15152d;
-      width: 100%;
-    }
+        #resultado h2 {
+            color: #75d5f0;
+        }
 
-    #resultado {
-      display: none;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 16px;
-      padding: 22px;
-      margin: 25px 0;
-      overflow-wrap: anywhere;
-    }
+        #puntuacion {
+            font-size: 27px;
+            font-weight: bold;
+            color: #75d5f0;
+        }
 
-    #resultado h2 { color: #7de3ff; }
+        #mensaje {
+            line-height: 1.7;
+            font-size: 16px;
+        }
 
-    .revision {
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.18);
-      line-height: 1.7;
-    }
+        .revision {
+            text-align: left;
+            margin-top: 25px;
+        }
 
-    .correcta { color: #8dffb2; }
-    .incorrecta { color: #ffaaaa; }
+        .revision-item {
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
 
-    .aviso, .pie {
-      text-align: center;
-      font-size: 13px;
-      color: #c5c8ed;
-      line-height: 1.5;
-      margin: 20px 0;
-    }
+        .correcta {
+            background: #1f684e;
+            border: 1px solid #5ee6ae;
+        }
 
-    @media (max-width: 480px) {
-      body { padding: 12px; }
-      .pregunta { padding: 16px; }
-    }
-  </style>
+        .incorrecta {
+            background: #753b43;
+            border: 1px solid #ff929b;
+        }
+
+        footer {
+            text-align: center;
+            margin: 25px auto 10px;
+            color: #b9d9e8;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 12px;
+            }
+
+            .contenedor {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .pregunta {
+                padding: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <main class="contenedor">
+
     <header>
-      <h1>💙 Test de amistad de Ryan 💙</h1>
-      <p>
-        ¿Cuánto me conoces de verdad?<br>
-        Responde las 17 preguntas y descubre tu puntuación.
-      </p>
+        <div class="bandera">🏴‍☠️</div>
+
+        <h1>Test de amistad de Ryan</h1>
+
+        <p>
+            ⚓ ¡Bienvenido a mi tripulación! ⚓<br>
+            ¿Crees conocerme lo suficiente para navegar conmigo?
+        </p>
     </header>
 
-    <div class="progreso-contenedor">
-      <div class="progreso-texto">
-        <span id="contador">0 de 17 respondidas</span>
-        <span>17 preguntas</span>
-      </div>
-      <div class="barra" role="progressbar"
-           aria-label="Progreso del test"
-           aria-valuemin="0" aria-valuemax="17"
-           aria-valuenow="0" id="barraContenedor">
-        <div id="barraProgreso"></div>
-      </div>
-    </div>
+    <main class="contenedor">
 
-    <form id="formulario">
-      <div id="listaPreguntas"></div>
-      <button type="submit" class="principal" id="botonTerminar">
-        Terminar test y ver resultado
-      </button>
-    </form>
+        <div class="introduccion">
+            <h2>☠️ ¡Demuestra que eres de confianza!</h2>
 
-    <p class="aviso">
-      🔒 Tu progreso se guarda en este navegador.
-      Actualizar la página no borrará tus respuestas.
-    </p>
+            <p>
+                Como en el mundo de One Piece, no cualquiera puede formar
+                parte de la tripulación de Ryan. Responde estas 10 preguntas
+                y descubre qué tan buen nakama eres.
+            </p>
 
-    <section id="resultado" aria-live="polite" tabindex="-1"></section>
+            <p>
+                🏆 Elige una respuesta por pregunta y pulsa
+                <strong>⚓ Terminar test</strong> para descubrir tu puntuación.
+            </p>
+        </div>
 
-    <div class="pie">
-      Hecho con 💙 para poner a prueba tu amistad con Ryan.
-    </div>
-  </main>
+        <form id="formulario">
+            <div id="listaPreguntas"></div>
 
-  <script>
-    "use strict";
+            <button type="submit" id="botonTerminar">
+                ⚓ Terminar test
+            </button>
+        </form>
 
-    const preguntas = [
-      {
-        pregunta: "¿Superhéroe favorito?",
-        opciones: ["Luffy", "Superman", "Spiderman", "Iron Man"],
-        correcta: 2
-      },
-      {
-        pregunta: "¿Persona que más he amado? (No familia)",
-        opciones: ["Una ex", "Messi", "Luffy", "Keiko"],
-        correcta: 1
-      },
-      {
-        pregunta: "¿Cuántas de mis mascotas fueron elegidas por mí?",
-        opciones: ["1", "2", "Todas", "Ninguna"],
-        correcta: 3
-      },
-      {
-        pregunta: "¿Crees que en verdad es serrucho, infiel o el peor hombre del mundo?",
-        opciones: [
-          "Sí", "No", "Tal vez",
-          "A mí me serruchó (decir nombre al priv)"
-        ],
-        correcta: 1
-      },
-      {
-        pregunta: "Si tuviera un hij@, ¿qué me gustaría que fuera?",
-        opciones: [
-          "Hombre", "Mujer", "No especificado", "No quiere tener hij@"
-        ],
-        correcta: 1
-      },
-      {
-        pregunta: "¿Qué evento del año le gusta más?",
-        opciones: ["Navidad", "Cumpleaños", "Carnaval", "Halloween"],
-        correcta: 2
-      },
-      {
-        pregunta: "Cosa que nunca hice",
-        opciones: ["Besar a un amigo xd", "Rogar", "Robar", "Pelear"],
-        correcta: 0
-      },
-      {
-        pregunta: "¿Cuántas veces ha llorado por amor?",
-        opciones: ["1", "2", "Más de 10", "Sigue llorando"],
-        correcta: 2
-      },
-      {
-        pregunta: "Si tuviera superpoderes, ¿qué crees que haría?",
-        opciones: [
-          "Salvar el mundo", "Destruir el mundo",
-          "Construir un mundo con ella", "Divertirse"
-        ],
-        correcta: 3
-      },
-      {
-        pregunta: "¿Tiene mejor amig@ y novia?",
-        opciones: [
-          "Sí", "No",
-          "Tiene mejor amig@ pero novia no",
-          "Tiene novia pero mejor amig@ no"
-        ],
-        correcta: 2
-      },
-      {
-        pregunta: "¿Alguna vez rogué a alguien?",
-        opciones: ["Sí", "No", "Tal vez"],
-        correcta: 0
-      },
-      {
-        pregunta: "¿Volvería con una ex?",
-        opciones: ["Sí", "No", "Ya lo hice", "Recontra no"],
-        correcta: 1
-      },
-      {
-        pregunta: "¿Alguna vez me alejé de mis amigos por alguien?",
-        opciones: ["Sí", "No", "Tal vez", "¿Todavía lo preguntas?"],
-        correcta: 1
-      },
-      {
-        pregunta: "¿Qué me gustaría más hacer? (Uy esas referencias.. solo para conocedores)",
-        opciones: [
-          "Viajar a Tarapoto",
-          "Vender gaseosa",
-          "Ver a Messi",
-          "Ninguna de las anteriores"
-        ],
-        correcta: 3
-      },
-      {
-        pregunta: "¿Qué sabe hacer?",
-        opciones: ["De todo", "Nada", "Ni mrd", "Rogar"],
-        correcta: 0
-      },
-      {
-        pregunta: "¿Segundo color favorito?",
-        opciones: ["Rojo", "Verde", "Turquesa", "Morado"],
-        correcta: 3
-      },
-      {
-        pregunta: "¿Qué le gusta leer?",
-        opciones: [
-          "Revistas científicas", "Manga",
-          "Periódico", "Mensajes de su ex"
-        ],
-        correcta: 0
-      }
-    ];
+        <section id="resultado">
+            <h2>🏴‍☠️ ¡Resultado de la aventura!</h2>
 
-    if (preguntas.length !== 17) {
-      throw new Error("El test debe contener exactamente 17 preguntas.");
-    }
+            <p id="puntuacion"></p>
 
-    const CLAVE_TEST = "testAmistadRyan_v1";
-    const formulario = document.getElementById("formulario");
-    const listaPreguntas = document.getElementById("listaPreguntas");
-    const contador = document.getElementById("contador");
-    const barraProgreso = document.getElementById("barraProgreso");
-    const barraContenedor = document.getElementById("barraContenedor");
-    const resultado = document.getElementById("resultado");
-    const botonTerminar = document.getElementById("botonTerminar");
+            <p id="mensaje"></p>
 
-    let testTerminado = false;
+            <div class="revision">
+                <h3>📜 Revisión de tus respuestas</h3>
+                <div id="detalleRespuestas"></div>
+            </div>
+        </section>
 
-    function escaparHTML(texto) {
-      return String(texto).replace(/[&<>"']/g, function(c) {
-        return {
-          "&": "&amp;", "<": "&lt;", ">": "&gt;",
-          '"': "&quot;", "'": "&#39;"
-        }[c];
-      });
-    }
+    </main>
 
-    function leerDatosGuardados() {
-      try {
-        const guardado = localStorage.getItem(CLAVE_TEST);
-        return guardado ? JSON.parse(guardado) : null;
-      } catch (error) {
-        console.warn("No se pudieron leer los datos guardados.", error);
-        return null;
-      }
-    }
+    <footer>
+        🏴‍☠️ Test de amistad de Ryan 🏴‍☠️<br>
+        Hecho para los verdaderos nakamas.
+    </footer>
 
-    function obtenerRespuestas() {
-      return preguntas.map((pregunta, indice) => {
-        const seleccionada = formulario.querySelector(
-          'input[name="pregunta' + indice + '"]:checked'
-        );
-        return seleccionada ? Number(seleccionada.value) : null;
-      });
-    }
+    <script>
+        const preguntas = [
+            {
+                pregunta: "¿Cuándo es mi cumpleaños?",
+                opciones: [
+                    "9 de agosto",
+                    "12 de diciembre",
+                    "7 de agosto",
+                    "15 de agosto"
+                ],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Comida favorita?",
+                opciones: [
+                    "Pollo a la brasa",
+                    "Tallarin con pollo",
+                    "Arroz con pollo",
+                    "Milanesa"
+                ],
+                correcta: 1
+            },
+            {
+                pregunta: "¿Por qué viajé a Casco?",
+                opciones: [
+                    "Abandono de hijo",
+                    "Postular a la policía",
+                    "Paseo",
+                    "A trabajar"
+                ],
+                correcta: 1
+            },
+            {
+                pregunta: "¿A quién descubrí haciendo algo vergonzoso?",
+                opciones: [
+                    "Toper (en el coco)",
+                    "Jhaziel (mani)",
+                    "Patrick (en casa de Maca)",
+                    "Dougret (lavando platos)",
+                    "Todas las anteriores"
+                ],
+                correcta: 4
+            },
+            {
+                pregunta: "¿Alguna vez un gei se enamoró de Ryan?",
+                opciones: [
+                    "Sí",
+                    "No",
+                    "Tal vez",
+                    "Sí, yo también"
+                ],
+                correcta: 0
+            },
+            {
+                pregunta: "¿Cuál ha sido el momento más vergonzoso de Ryan?",
+                opciones: [
+                    "Hacerse pelacho",
+                    "Caerse de cara en frente de su crush",
+                    "Esconderse debajo de una cama",
+                    "Verlo llorando por su ex"
+                ],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Qué es lo que nunca perdonaría?",
+                opciones: [
+                    "Infidelidad",
+                    "Que me deban plata",
+                    "Traición de un amig@"
+                ],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Defecto más feo?",
+                opciones: [
+                    "Ser burlón",
+                    "No le gusta nada",
+                    "Serrucho",
+                    "Infiel"
+                ],
+                correcta: 1
+            },
+            {
+                pregunta: "¿Primer anime que vi?",
+                opciones: [
+                    "7 pecados capitales",
+                    "Dragon Ball",
+                    "One Piece",
+                    "Ataque a los titanes"
+                ],
+                correcta: 0
+            },
+            {
+                pregunta: "¿Alguna vez me rompí un hueso?",
+                opciones: [
+                    "Sí",
+                    "No",
+                    "Tal vez",
+                    "El sin hueso"
+                ],
+                correcta: 0
+            }
+        ];
 
-    function guardarProgreso() {
-      try {
-        localStorage.setItem(CLAVE_TEST, JSON.stringify({
-          respuestas: obtenerRespuestas(),
-          terminado: testTerminado
-        }));
-      } catch (error) {
-        console.warn("No se pudo guardar el progreso.", error);
-      }
-    }
+        const formulario = document.getElementById("formulario");
+        const listaPreguntas = document.getElementById("listaPreguntas");
+        const resultado = document.getElementById("resultado");
+        const puntuacion = document.getElementById("puntuacion");
+        const mensaje = document.getElementById("mensaje");
+        const detalleRespuestas = document.getElementById("detalleRespuestas");
+        const botonTerminar = document.getElementById("botonTerminar");
 
-    function actualizarProgreso() {
-      const respuestas = obtenerRespuestas();
-      const respondidas = respuestas.filter(r => r !== null).length;
+        const CLAVE_RESPUESTAS = "testRyanRespuestas";
+        const CLAVE_RESULTADO = "testRyanResultado";
 
-      contador.textContent = respondidas + " de 17 respondidas";
-      barraProgreso.style.width = (respondidas / 17 * 100) + "%";
-      barraContenedor.setAttribute("aria-valuenow", respondidas);
-    }
+        let terminado = localStorage.getItem(CLAVE_RESULTADO) !== null;
 
-    function crearPreguntas() {
-      preguntas.forEach((item, indice) => {
-        const bloque = document.createElement("section");
-        bloque.className = "pregunta";
+        // Crear las preguntas automáticamente.
+        preguntas.forEach((pregunta, indice) => {
+            const tarjeta = document.createElement("section");
+            tarjeta.className = "pregunta";
 
-        const titulo = document.createElement("h2");
-        const numero = document.createElement("span");
-        numero.className = "numero";
-        numero.textContent = "Pregunta " + (indice + 1) + " de 17: ";
+            const titulo = document.createElement("h3");
+            titulo.textContent =
+                `${indice + 1}. ${pregunta.pregunta}`;
 
-        titulo.appendChild(numero);
-        titulo.appendChild(document.createTextNode(item.pregunta));
-        bloque.appendChild(titulo);
+            tarjeta.appendChild(titulo);
 
-        item.opciones.forEach((opcion, indiceOpcion) => {
-          const etiqueta = document.createElement("label");
-          etiqueta.className = "opcion";
+            pregunta.opciones.forEach((opcion, indiceOpcion) => {
+                const etiqueta = document.createElement("label");
+                etiqueta.className = "opcion";
 
-          const radio = document.createElement("input");
-          radio.type = "radio";
-          radio.name = "pregunta" + indice;
-          radio.value = String(indiceOpcion);
-          radio.required = true;
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = `pregunta${indice}`;
+                radio.value = indiceOpcion;
+                radio.required = true;
 
-          radio.addEventListener("change", function() {
-            actualizarProgreso();
-            guardarProgreso();
-          });
+                const texto = document.createElement("span");
+                texto.textContent = opcion;
 
-          const texto = document.createElement("span");
-          texto.textContent = opcion;
+                etiqueta.appendChild(radio);
+                etiqueta.appendChild(texto);
 
-          etiqueta.appendChild(radio);
-          etiqueta.appendChild(texto);
-          bloque.appendChild(etiqueta);
+                tarjeta.appendChild(etiqueta);
+            });
+
+            listaPreguntas.appendChild(tarjeta);
         });
 
-        listaPreguntas.appendChild(bloque);
-      });
-    }
+        // Recuperar las respuestas guardadas.
+        function cargarRespuestas() {
+            const guardadas = localStorage.getItem(CLAVE_RESPUESTAS);
 
-    function mostrarResultado() {
-      const respuestas = obtenerRespuestas();
+            if (!guardadas) {
+                return;
+            }
 
-      if (respuestas.some(r => r === null)) {
-        testTerminado = false;
-        guardarProgreso();
-        return;
-      }
+            try {
+                const respuestas = JSON.parse(guardadas);
 
-      let puntuacion = 0;
-      let revisionHTML = "";
+                respuestas.forEach((respuesta, indice) => {
+                    if (respuesta !== null && respuesta !== undefined) {
+                        const radio = document.querySelector(
+                            `input[name="pregunta${indice}"][value="${respuesta}"]`
+                        );
 
-      preguntas.forEach((item, indice) => {
-        const respuestaUsuario = respuestas[indice];
-        const acerto = respuestaUsuario === item.correcta;
-
-        if (acerto) puntuacion++;
-
-        revisionHTML += `
-          <div class="revision">
-            <strong>${indice + 1}. ${escaparHTML(item.pregunta)}</strong><br>
-            <span class="${acerto ? "correcta" : "incorrecta"}">
-              ${acerto ? "✓ Correcto" : "✗ Incorrecto"}
-            </span><br>
-            Tu respuesta: ${escaparHTML(item.opciones[respuestaUsuario])}<br>
-            Respuesta correcta: ${escaparHTML(item.opciones[item.correcta])}
-          </div>
-        `;
-      });
-
-      const porcentaje = Math.round(puntuacion / 17 * 100);
-      let mensaje;
-
-      if (puntuacion === 17) {
-        mensaje = "¡Perfecto! ¡Conoces a Ryan de maravilla! 🏆";
-      } else if (puntuacion >= 14) {
-        mensaje = "¡Excelente! Conoces muy bien a Ryan. 💙";
-      } else if (puntuacion >= 10) {
-        mensaje = "¡Bien! Pero todavía hay cosas que aprender. 😎";
-      } else if (puntuacion >= 5) {
-        mensaje = "Te falta conocer un poco más a Ryan. 😂";
-      } else {
-        mensaje = "¡Necesitas estudiar más a Ryan! 🤣";
-      }
-
-      resultado.innerHTML = `
-        <h2>🎉 ¡Test terminado!</h2>
-        <p style="font-size:32px;font-weight:bold">${puntuacion} / 17</p>
-        <p>${porcentaje}% de respuestas correctas.</p>
-        <p>${mensaje}</p>
-        <h3>Revisión de tus respuestas</h3>
-        ${revisionHTML}
-        <p class="aviso">
-          Este test ya está terminado en este navegador.
-        </p>
-      `;
-
-      testTerminado = true;
-      guardarProgreso();
-      formulario.style.display = "none";
-      resultado.style.display = "block";
-    }
-
-    function cargarProgreso() {
-      const datos = leerDatosGuardados();
-
-      if (!datos ||
-          !Array.isArray(datos.respuestas) ||
-          datos.respuestas.length !== preguntas.length) {
-        return;
-      }
-
-      datos.respuestas.forEach((respuesta, indice) => {
-        if (respuesta === null) return;
-
-        const opcion = Number(respuesta);
-
-        if (!Number.isInteger(opcion) ||
-            opcion < 0 ||
-            opcion >= preguntas[indice].opciones.length) {
-          return;
+                        if (radio) {
+                            radio.checked = true;
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("No se pudieron recuperar las respuestas.");
+            }
         }
 
-        const radio = formulario.querySelector(
-          'input[name="pregunta' + indice + '"][value="' + opcion + '"]'
-        );
+        // Guardar las respuestas al seleccionar una opción.
+        formulario.addEventListener("change", () => {
+            if (terminado) {
+                return;
+            }
 
-        if (radio) radio.checked = true;
-      });
+            const respuestas = preguntas.map((pregunta, indice) => {
+                const seleccionada = document.querySelector(
+                    `input[name="pregunta${indice}"]:checked`
+                );
 
-      actualizarProgreso();
+                return seleccionada ? Number(seleccionada.value) : null;
+            });
 
-      if (datos.terminado &&
-          obtenerRespuestas().every(r => r !== null)) {
-        mostrarResultado();
-      }
-    }
-
-    formulario.addEventListener("submit", function(evento) {
-      evento.preventDefault();
-
-      if (testTerminado) return;
-
-      const respuestas = obtenerRespuestas();
-
-      if (respuestas.some(r => r === null)) {
-        const indice = respuestas.findIndex(r => r === null);
-        const bloque = listaPreguntas.children[indice];
-
-        bloque.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
+            localStorage.setItem(
+                CLAVE_RESPUESTAS,
+                JSON.stringify(respuestas)
+            );
         });
 
-        bloque.querySelector("input").focus();
-        alert("Responde las 17 preguntas antes de terminar el test.");
-        return;
-      }
+        // Mostrar el resultado final.
+        function mostrarResultado(respuestas, puntajeGuardado = null) {
+            let puntaje = 0;
 
-      mostrarResultado();
+            preguntas.forEach((pregunta, indice) => {
+                if (Number(respuestas[indice]) === pregunta.correcta) {
+                    puntaje++;
+                }
+            });
 
-      resultado.focus();
-      resultado.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
+            if (puntajeGuardado !== null) {
+                puntaje = puntajeGuardado;
+            }
 
-    crearPreguntas();
-    cargarProgreso();
-  </script>
-</body>
-</html>
+            puntuacion.textContent = `${puntaje} / ${preguntas.length}`;
+
+            if (puntaje === 10) {
+                mensaje.textContent =
+                    "👑 ¡Eres el Rey de los Nakamas! Conoces a Ryan perfectamente. ¡Ni la Marina puede detener esta amistad!";
+            } else if (puntaje >= 7) {
+                mensaje.textContent =
+                    "🏴‍☠️ ¡Eres parte importante de la tripulación! Conoces bastante bien a Ryan.";
+            } else if (puntaje >= 4) {
+                mensaje.textContent =
+                    "⚓ Eres un nakama en entrenamiento. ¡Todavía te falta conocer algunas aventuras de Ryan!";
+            } else {
+                mensaje.textContent =
+                    "💀 ¡Parece que recién te uniste a la tripulación! Tendrás que conocer mejor a Ryan para convertirte en un verdadero nakama.";
+            }
+
+            detalleRespuestas.innerHTML = "";
+
+           
