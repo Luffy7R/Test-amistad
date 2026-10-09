@@ -55,7 +55,6 @@ label {
   background: #315d78;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
 label:has(input:checked) {
@@ -129,85 +128,127 @@ button:disabled {
 <script>
 const preguntas = [
   {
-    pregunta: "¿Cuál es mi superhéroe favorito?",
-    opciones: ["Luffy", "Superman", "Spiderman", "Iron Man"],
+    pregunta: "¿Superheroe favorito?",
+    opciones: ["luffy", "superman", "Spiderman", "Iron man"],
     correcta: 2
   },
   {
-    pregunta: "¿Qué persona he amado más? (No cuenta la familia)",
+    pregunta: "¿Persona que mas he amado? (No familia)",
     opciones: ["Una ex", "Messi", "Luffy", "Keiko"],
     correcta: 1
   },
   {
-    pregunta: "¿Cuántas de mis mascotas fueron elegidas por mí?",
-    opciones: ["1", "2", "Todas", "Ninguna"],
+    pregunta: "¿Cuantas de mis mascotas fueron elegidas por mi?",
+    opciones: ["1", "2", "todas", "Ninguna"],
     correcta: 3
   },
   {
-    pregunta: "¿De verdad crees que soy serrucho, infiel o el peor hombre del mundo?",
+    pregunta: "¿Crees que en verdad es serrucho, infiel o el peor hombre del mundo?",
+    opciones: [
+      "Si",
+      "No",
+      "tal vez",
+      "a mi me serrucho (decir nombre al priv)"
+    ],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Si tuviera un hij@ que me gustaría que fuera?",
+    opciones: ["hombre", "mujer", "no especificado", "no quiere tener hij@"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Que evento del año le gusta mas?",
+    opciones: ["Navidad", "Cumpleaños", "Carnaval", "Hallowen"],
+    correcta: 2
+  },
+  {
+    pregunta: "Cosa que nunca hice",
+    opciones: ["besar a un amigo xd", "rogar", "robar", "pelear"],
+    correcta: 0
+  },
+  {
+    pregunta: "¿Cuantas veces ah llorado por amor?",
+    opciones: ["1", "2", "mas de 10", "sigue llorando"],
+    correcta: 2
+  },
+  {
+    pregunta: "¿Si tuviera superpoderes que crees que haría?",
+    opciones: [
+      "salvar el mundo",
+      "destruir el mundo",
+      "construir un mundo con ella",
+      "Divertirse"
+    ],
+    correcta: 3
+  },
+  {
+    pregunta: "¿Tiene mejor amig@ y novia?",
+    opciones: [
+      "Si",
+      "No",
+      "tiene mejor amig@ pero novia no",
+      "tiene novia pero mejor amig@ no"
+    ],
+    correcta: 2
+  },
+
+  // NUEVAS PREGUNTAS (11-17)
+  {
+    pregunta: "¿Alguna vez rogué a alguien?",
+    opciones: ["Sí", "No", "Tal vez"],
+    correcta: 0
+  },
+  {
+    pregunta: "¿Volvería con una ex?",
+    opciones: ["Sí", "No", "Ya lo hice", "Recontra no"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Alguna vez me alejé de mis amigos por alguien?",
     opciones: [
       "Sí",
       "No",
       "Tal vez",
-      "A mí me serruchó (di el nombre al privado)"
+      "¿Todavía lo preguntas?"
     ],
     correcta: 1
   },
   {
-    pregunta: "Si tuviera un hij@, ¿qué me gustaría que fuera?",
+    pregunta: "¿Qué me gustaría más hacer? (Uy, esas referencias... solo para conocedores)",
     opciones: [
-      "Hombre",
-      "Mujer",
-      "No especificado",
-      "No quiere tener hij@"
-    ],
-    correcta: 1
-  },
-  {
-    pregunta: "¿Qué evento del año me gusta más?",
-    opciones: ["Navidad", "Cumpleaños", "Carnaval", "Halloween"],
-    correcta: 2
-  },
-  {
-    pregunta: "¿Qué cosa nunca he hecho?",
-    opciones: [
-      "Besar a un amigo xd",
-      "Rogar",
-      "Robar",
-      "Pelear"
-    ],
-    correcta: 0
-  },
-  {
-    pregunta: "¿Cuántas veces he llorado por amor?",
-    opciones: ["1", "2", "Más de 10", "Sigo llorando"],
-    correcta: 2
-  },
-  {
-    pregunta: "Si tuviera superpoderes, ¿qué crees que haría?",
-    opciones: [
-      "Salvar el mundo",
-      "Destruir el mundo",
-      "Construir un mundo con ella",
-      "Divertirme"
+      "Viajar a Tarapoto",
+      "Vender gaseosa",
+      "Ver a Messi",
+      "Ninguna de las anteriores"
     ],
     correcta: 3
   },
   {
-    pregunta: "¿Tengo mejor amig@ y novia?",
+    pregunta: "¿Qué sé hacer?",
+    opciones: ["De todo", "Nada", "Ni mrd", "Rogar"],
+    correcta: 0
+  },
+  {
+    pregunta: "¿Cuál es mi segundo color favorito?",
+    opciones: ["Rojo", "Verde", "Turquesa", "Morado"],
+    correcta: 3
+  },
+  {
+    pregunta: "¿Qué me gusta leer?",
     opciones: [
-      "Sí",
-      "No",
-      "Tengo mejor amig@, pero novia no",
-      "Tengo novia, pero mejor amig@ no"
+      "Revistas científicas",
+      "Manga",
+      "Periódico",
+      "Mensajes de su ex"
     ],
-    correcta: 2
+    correcta: 0
   }
 ];
 
 const formulario = document.getElementById("test");
 
-// Crear automáticamente las 10 preguntas
+// Mostrar las 17 preguntas
 preguntas.forEach((p, i) => {
   const bloque = document.createElement("section");
   bloque.className = "question";
@@ -227,7 +268,6 @@ preguntas.forEach((p, i) => {
 
     label.appendChild(radio);
     label.appendChild(document.createTextNode(opcion));
-
     bloque.appendChild(label);
   });
 
@@ -237,7 +277,6 @@ preguntas.forEach((p, i) => {
 function calificar() {
   const respuestas = [];
 
-  // Comprobar que todas las preguntas estén respondidas
   for (let i = 0; i < preguntas.length; i++) {
     const seleccionada = document.querySelector(
       `input[name="pregunta${i}"]:checked`
@@ -260,13 +299,10 @@ function calificar() {
   let puntos = 0;
   let revision = "";
 
-  // Revisar las respuestas
   preguntas.forEach((p, i) => {
     const acierto = respuestas[i] === p.correcta;
 
-    if (acierto) {
-      puntos++;
-    }
+    if (acierto) puntos++;
 
     revision += `
       <p class="${acierto ? "correcta" : "incorrecta"}">
@@ -274,21 +310,20 @@ function calificar() {
         Tu respuesta: ${p.opciones[respuestas[i]]}<br>
         ${
           acierto
-            ? "✅ ¡Respuesta correcta!"
+            ? "✅ ¡Correcto!"
             : "❌ Respuesta correcta: " + p.opciones[p.correcta]
         }
       </p>
     `;
   });
 
-  // Mensaje según la puntuación
   let mensaje;
 
-  if (puntos === 10) {
+  if (puntos === preguntas.length) {
     mensaje = "🏆 ¡Perfecto! Conoces a Ryan al máximo.";
-  } else if (puntos >= 8) {
+  } else if (puntos >= 14) {
     mensaje = "⚓ ¡Excelente! Conoces muy bien a Ryan.";
-  } else if (puntos >= 6) {
+  } else if (puntos >= 10) {
     mensaje = "🏴‍☠️ Vas bien, pero todavía te falta conocerlo.";
   } else {
     mensaje = "💀 ¡Necesitas conocer mejor a Ryan!";
@@ -298,7 +333,7 @@ function calificar() {
 
   resultado.style.display = "block";
   resultado.innerHTML = `
-    <h2>🏆 Resultado: ${puntos}/10</h2>
+    <h2>🏆 Resultado: ${puntos}/${preguntas.length}</h2>
     <p>${mensaje}</p>
     <h3>📋 Revisión de respuestas</h3>
     ${revision}
